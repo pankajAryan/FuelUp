@@ -14,9 +14,12 @@
 #import "TabBarView.h"
 #import "DataModels.h"
 #import "CLLocationManager+blocks.h"
+#import "StoreDetailViewController.h"
 
 @interface HomeViewController() {
     
+    HomeMapStoreModelBaseClass *fuelStationBase;
+
     NSString *lat;
     NSString *lon;
 }
@@ -131,25 +134,34 @@
 
 - (IBAction)menuButtonAction:(id)sender {
     
-    [self.view layoutIfNeeded];
-
-    [UIView animateWithDuration:0.5 animations:^{
-        
-        UIButton *menuButton = sender;
-        
-        if (menuButton.tag) {
-            // Hide Manu
-            _layoutConstraintMenuView_leading.constant = -ScreenHeight;
-            menuButton.tag = 0;
-        }
-        else {
-            // Show Manu
-            _layoutConstraintMenuView_leading.constant = 0;
-            menuButton.tag = 1;
-        }
-        
+    UIButton *btn = sender;
+    
+    if (btn.tag == 1) {
+        StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else {
         [self.view layoutIfNeeded];
-    }];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            UIButton *menuButton = sender;
+            
+            if (menuButton.tag) {
+                // Hide Manu
+                _layoutConstraintMenuView_leading.constant = -ScreenHeight;
+                menuButton.tag = 0;
+            }
+            else {
+                // Show Manu
+                _layoutConstraintMenuView_leading.constant = 0;
+                menuButton.tag = 1;
+            }
+            
+            [self.view layoutIfNeeded];
+        }];
+
+    }
 }
 
 - (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton {
@@ -159,14 +171,17 @@
 
 - (void)drawFuelStationsAtMap {
     
-    for (FuelStationResponseObject *fuelStation in fuelStationBase.responseObject) {
+    for (HomeMapStoreModelResponseObject *fuelStationPin in fuelStationBase.responseObject) {
 
         // Creates a marker in the center of the map.
         GMSMarker *marker = [[GMSMarker alloc] init];
-        marker.position = CLLocationCoordinate2DMake([fuelStation.lat doubleValue], [fuelStation.lon doubleValue]);
-        marker.title = fuelStation.name;
-        marker.snippet = fuelStation.address;
-        marker.icon = [UIImage imageNamed:@"map_pin.png"];
+        marker.position = CLLocationCoordinate2DMake([fuelStationPin.lat doubleValue], [fuelStationPin.lon doubleValue]);
+        marker.title = fuelStationPin.name;
+        marker.snippet = fuelStationPin.address;
+        marker.icon = [UIImage imageNamed:@"map_pin"];
+//        marker.iconView = nil;
+        marker.appearAnimation = kGMSMarkerAnimationPop;
+        marker.userData = fuelStationPin;
         marker.map = _mapView;
     }
 }
@@ -330,7 +345,7 @@
                         if (localError == nil) {
                             
                             NSLog(@"Response = %@",responseDict);
-                            fuelStationBase = [[FuelStationBaseClass alloc] initWithDictionary:responseDict];
+                            fuelStationBase = [[HomeMapStoreModelBaseClass alloc] initWithDictionary:responseDict];
                             
                             if ([fuelStationBase.errorMessage isEqualToString:@"Success"]) {
                                 
@@ -361,7 +376,7 @@
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
                                                                 longitude:[lon floatValue]
-                                                                     zoom:12];
+                                                                     zoom:13];
     
    // _mapView = [GMSMapView mapWithFrame:_mapView.bounds camera:camera];
     _mapView.camera = camera;

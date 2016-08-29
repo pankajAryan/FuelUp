@@ -18,6 +18,8 @@ NSString *const kStoreDetailResponseObjectLat = @"lat";
 NSString *const kStoreDetailResponseObjectOfferList = @"offerList";
 NSString *const kStoreDetailResponseObjectName = @"name";
 NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
+NSString *const kStoreDetailResponseObjectBrand = @"brand";
+
 
 
 @interface StoreDetailResponseObject ()
@@ -36,6 +38,7 @@ NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
 @synthesize offerList = _offerList;
 @synthesize name = _name;
 @synthesize phoneNumber = _phoneNumber;
+@synthesize brand = _brand;
 
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict
@@ -82,6 +85,7 @@ NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
     self.offerList = [NSArray arrayWithArray:parsedStoreDetailOfferList];
             self.name = [self objectOrNilForKey:kStoreDetailResponseObjectName fromDictionary:dict];
             self.phoneNumber = [self objectOrNilForKey:kStoreDetailResponseObjectPhoneNumber fromDictionary:dict];
+        self.brand = [self objectOrNilForKey:kStoreDetailResponseObjectBrand fromDictionary:dict];
 
     }
     
@@ -120,6 +124,7 @@ NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
     [mutableDict setValue:[NSArray arrayWithArray:tempArrayForOfferList] forKey:kStoreDetailResponseObjectOfferList];
     [mutableDict setValue:self.name forKey:kStoreDetailResponseObjectName];
     [mutableDict setValue:self.phoneNumber forKey:kStoreDetailResponseObjectPhoneNumber];
+    [mutableDict setValue:self.brand forKey:kStoreDetailResponseObjectBrand];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -151,6 +156,8 @@ NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
     self.offerList = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectOfferList];
     self.name = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectName];
     self.phoneNumber = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectPhoneNumber];
+    self.brand = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectBrand];
+
     return self;
 }
 
@@ -165,6 +172,8 @@ NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
     [aCoder encodeObject:_offerList forKey:kStoreDetailResponseObjectOfferList];
     [aCoder encodeObject:_name forKey:kStoreDetailResponseObjectName];
     [aCoder encodeObject:_phoneNumber forKey:kStoreDetailResponseObjectPhoneNumber];
+    [aCoder encodeObject:_brand forKey:kStoreDetailResponseObjectBrand];
+
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -181,6 +190,8 @@ NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
         copy.offerList = [self.offerList copyWithZone:zone];
         copy.name = [self.name copyWithZone:zone];
         copy.phoneNumber = [self.phoneNumber copyWithZone:zone];
+        copy.brand = [self.brand copyWithZone:zone];
+
     }
     
     return copy;

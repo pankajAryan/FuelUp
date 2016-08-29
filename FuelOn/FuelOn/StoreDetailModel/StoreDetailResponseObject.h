@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSArray *offerList;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, strong) NSString *brand;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

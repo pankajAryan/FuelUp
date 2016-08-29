@@ -187,7 +187,7 @@
     
     [prefs setObject:data forKey:key];
     [prefs synchronize];
-    //    //DDLogDebug(@"%@",[prefs dictionaryForKey:key]);
+    NSLog(@"%@",[prefs dictionaryForKey:key]);
 }
 
 

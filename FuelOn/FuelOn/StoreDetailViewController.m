@@ -90,4 +90,39 @@
 }
 */
 
+- (IBAction)action_back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)action_favourites:(id)sender {
+}
+
+- (IBAction)action_directions:(id)sender {
+}
+
+
+#pragma mark - UITableViewDelegates & UITableViewDatasources
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
+- (NSInteger)numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    //StoreDetailCellID
+    
+    return nil;
+
+}
+
+
+
 @end

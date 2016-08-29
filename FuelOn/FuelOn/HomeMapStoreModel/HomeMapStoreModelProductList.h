@@ -1,17 +1,17 @@
 //
-//  FuelStationProductList.h
+//  HomeMapStoreModelProductList.h
 //
-//  Created by   on 28/08/16
+//  Created by   on 29/08/16
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@class FuelStationProduct;
+@class HomeMapStoreModelProduct;
 
-@interface FuelStationProductList : NSObject <NSCoding, NSCopying>
+@interface HomeMapStoreModelProductList : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic, strong) FuelStationProduct *product;
+@property (nonatomic, strong) HomeMapStoreModelProduct *product;
 @property (nonatomic, strong) NSString *lastUpdated;
 @property (nonatomic, strong) NSString *cost;
 

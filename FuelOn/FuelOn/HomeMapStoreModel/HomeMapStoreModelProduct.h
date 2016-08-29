@@ -1,7 +1,7 @@
 //
-//  FuelStationProduct.h
+//  HomeMapStoreModelProduct.h
 //
-//  Created by   on 28/08/16
+//  Created by   on 29/08/16
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
@@ -9,7 +9,7 @@
 
 
 
-@interface FuelStationProduct : NSObject <NSCoding, NSCopying>
+@interface HomeMapStoreModelProduct : NSObject <NSCoding, NSCopying>
 
 @property (nonatomic, assign) id status;
 @property (nonatomic, assign) id productName;

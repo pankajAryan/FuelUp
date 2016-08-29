@@ -1,25 +1,25 @@
 //
-//  FuelStationProduct.m
+//  HomeMapStoreModelProduct.m
 //
-//  Created by   on 28/08/16
+//  Created by   on 29/08/16
 //  Copyright (c) 2016 __MyCompanyName__. All rights reserved.
 //
 
-#import "FuelStationProduct.h"
+#import "HomeMapStoreModelProduct.h"
 
 
-NSString *const kFuelStationProductStatus = @"status";
-NSString *const kFuelStationProductProductName = @"productName";
-NSString *const kFuelStationProductProductId = @"productId";
+NSString *const kHomeMapStoreModelProductStatus = @"status";
+NSString *const kHomeMapStoreModelProductProductName = @"productName";
+NSString *const kHomeMapStoreModelProductProductId = @"productId";
 
 
-@interface FuelStationProduct ()
+@interface HomeMapStoreModelProduct ()
 
 - (id)objectOrNilForKey:(id)aKey fromDictionary:(NSDictionary *)dict;
 
 @end
 
-@implementation FuelStationProduct
+@implementation HomeMapStoreModelProduct
 
 @synthesize status = _status;
 @synthesize productName = _productName;
@@ -38,9 +38,9 @@ NSString *const kFuelStationProductProductId = @"productId";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.status = [self objectOrNilForKey:kFuelStationProductStatus fromDictionary:dict];
-            self.productName = [self objectOrNilForKey:kFuelStationProductProductName fromDictionary:dict];
-            self.productId = [self objectOrNilForKey:kFuelStationProductProductId fromDictionary:dict];
+            self.status = [self objectOrNilForKey:kHomeMapStoreModelProductStatus fromDictionary:dict];
+            self.productName = [self objectOrNilForKey:kHomeMapStoreModelProductProductName fromDictionary:dict];
+            self.productId = [self objectOrNilForKey:kHomeMapStoreModelProductProductId fromDictionary:dict];
 
     }
     
@@ -51,9 +51,9 @@ NSString *const kFuelStationProductProductId = @"productId";
 - (NSDictionary *)dictionaryRepresentation
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-    [mutableDict setValue:self.status forKey:kFuelStationProductStatus];
-    [mutableDict setValue:self.productName forKey:kFuelStationProductProductName];
-    [mutableDict setValue:self.productId forKey:kFuelStationProductProductId];
+    [mutableDict setValue:self.status forKey:kHomeMapStoreModelProductStatus];
+    [mutableDict setValue:self.productName forKey:kHomeMapStoreModelProductProductName];
+    [mutableDict setValue:self.productId forKey:kHomeMapStoreModelProductProductId];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -77,23 +77,23 @@ NSString *const kFuelStationProductProductId = @"productId";
 {
     self = [super init];
 
-    self.status = [aDecoder decodeObjectForKey:kFuelStationProductStatus];
-    self.productName = [aDecoder decodeObjectForKey:kFuelStationProductProductName];
-    self.productId = [aDecoder decodeObjectForKey:kFuelStationProductProductId];
+    self.status = [aDecoder decodeObjectForKey:kHomeMapStoreModelProductStatus];
+    self.productName = [aDecoder decodeObjectForKey:kHomeMapStoreModelProductProductName];
+    self.productId = [aDecoder decodeObjectForKey:kHomeMapStoreModelProductProductId];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 
-    [aCoder encodeObject:_status forKey:kFuelStationProductStatus];
-    [aCoder encodeObject:_productName forKey:kFuelStationProductProductName];
-    [aCoder encodeObject:_productId forKey:kFuelStationProductProductId];
+    [aCoder encodeObject:_status forKey:kHomeMapStoreModelProductStatus];
+    [aCoder encodeObject:_productName forKey:kHomeMapStoreModelProductProductName];
+    [aCoder encodeObject:_productId forKey:kHomeMapStoreModelProductProductId];
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    FuelStationProduct *copy = [[FuelStationProduct alloc] init];
+    HomeMapStoreModelProduct *copy = [[HomeMapStoreModelProduct alloc] init];
     
     if (copy) {
 
