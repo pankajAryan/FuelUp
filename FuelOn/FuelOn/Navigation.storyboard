@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="5tD-Bw-YFY">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" id="NVV-b6-dFR" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="6nE-H4-gcf">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="0.58823529409999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ckG-St-KEM" kind="relationship" relationship="viewControllers" id="mtz-if-sbI"/>
+                        <segue destination="hCA-sg-EzX" kind="relationship" relationship="viewControllers" id="dYf-cR-LQv"/>
+                        <segue destination="0V4-ln-2Qd" kind="relationship" relationship="viewControllers" id="X90-ZH-rtC"/>
+                        <segue destination="q45-2l-pdM" kind="relationship" relationship="viewControllers" id="sPX-gs-MKA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3CC-DT-vs9" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-168" y="-398"/>
+        </scene>
+        <!--WishlistTab-->
+        <scene sceneID="0tk-BX-KBM">
+            <objects>
+                <navigationController id="hCA-sg-EzX" userLabel="WishlistTab" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Wishlist" image="tab_wishlist_grey" id="1Hd-GJ-7X7"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="LQt-rh-moA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rxn-IF-quI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="422" y="-114"/>
+        </scene>
+        <!--CartTab-->
+        <scene sceneID="fIc-On-FgG">
+            <objects>
+                <navigationController id="0V4-ln-2Qd" userLabel="CartTab" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cart" image="tab_cart_grey" id="NQL-U4-Pe6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Qkq-43-hgY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qV2-wI-ZQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="316" y="483"/>
+        </scene>
+        <!--AccountTab-->
+        <scene sceneID="2iP-uX-gzF">
+            <objects>
+                <navigationController id="q45-2l-pdM" userLabel="AccountTab" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Profile" image="tab_MyAccount_grey" id="KnI-UZ-e5y"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Qge-OO-Q2X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WMO-0c-3yu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42" y="841"/>
+        </scene>
+        <!--MoreTab-->
+        <scene sceneID="tHK-1K-JTW">
+            <objects>
+                <navigationController id="Yl7-FG-9Vc" userLabel="MoreTab" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="More" image="tab_more_grey" id="lCb-zC-nwu"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ZGj-jr-wYY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bqe-PI-NjQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-423" y="1167"/>
+        </scene>
+        <!--HomeTab-->
+        <scene sceneID="BkG-aF-NTb">
+            <objects>
+                <viewController storyboardIdentifier="rootController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ckG-St-KEM" userLabel="HomeTab" customClass="RootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dwg-t0-kFk"/>
+                        <viewControllerLayoutGuide type="bottom" id="uQa-07-VZy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S2u-jk-Zbc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Regular 91" image="tab_home_grey" id="qeC-tO-Kp2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YzI-nl-5HM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="259" y="-650"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tab_MyAccount_grey" width="30" height="30"/>
+        <image name="tab_cart_grey" width="30" height="30"/>
+        <image name="tab_home_grey" width="30" height="30"/>
+        <image name="tab_more_grey" width="30" height="30"/>
+        <image name="tab_wishlist_grey" width="30" height="30"/>
+    </resources>
+</document>
