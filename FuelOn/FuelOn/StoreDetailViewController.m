@@ -35,7 +35,7 @@
     components.port = [NSNumber numberWithInteger:8080];
     components.path = @"/FuelONServer/rest/service/getStoreDetail";
 
-    NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"storeId" value:@"1"];
+    NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"storeId" value:@"1"]; //_storeId
 
     components.queryItems = @[item1];
 
@@ -65,7 +65,7 @@
                 if ([storeDetailBase.errorMessage isEqualToString:@"Success"]) {
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        
+                        [_table_storeDetail reloadData];
                     });
                 }
             }
@@ -111,8 +111,9 @@
     return 10;
 }
 
-- (NSInteger)numberOfRowsInSection:(NSInteger)section{
-    return 10;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return storeDetailBase.responseObject.offerList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -120,7 +121,6 @@
     //StoreDetailCellID
     
     return nil;
-
 }
 
 

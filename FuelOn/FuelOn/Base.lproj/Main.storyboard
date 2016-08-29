@@ -686,7 +686,7 @@
                                             <action selector="menuButtonAction:" destination="k2Q-NJ-vft" eventType="touchUpInside" id="Jdd-QZ-xsj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ris-Iz-R37">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ris-Iz-R37">
                                         <rect key="frame" x="50" y="12" width="34" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="34" id="GRd-Zj-9Aq"/>
@@ -770,7 +770,7 @@
                                         <rect key="frame" x="0.0" y="108" width="235.5" height="398"/>
                                         <color key="backgroundColor" red="0.99215686274509807" green="0.63137254901960782" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell" id="tPC-Tc-vfo">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell" id="tPC-Tc-vfo">
                                                 <rect key="frame" x="0.0" y="1" width="235.5" height="40"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tPC-Tc-vfo" id="qpm-Fw-tkP">
@@ -1104,8 +1104,8 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="jMh-nV-yNJ"/>
                                                 <exclude reference="439-VX-6Bv"/>
+                                                <exclude reference="jMh-nV-yNJ"/>
                                             </mask>
                                         </variation>
                                     </imageView>

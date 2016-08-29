@@ -71,9 +71,9 @@
     static NSString *cellIdentifier = @"menuCell";
     
     UITableViewCell *leftMenuCell  = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    //    if (leftMenuCell == nil) {
-    //        leftMenuCell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    //    }
+    if (leftMenuCell == nil) {
+        leftMenuCell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     
     UIImageView *menuIcon = (UIImageView*)[leftMenuCell viewWithTag:120];
     UILabel *menuTitle = (UILabel*)[leftMenuCell viewWithTag:121];
@@ -130,68 +130,47 @@
     return leftMenuCell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.view layoutIfNeeded];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        // Hide Manu
+        _layoutConstraintMenuView_leading.constant = -ScreenHeight;
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - Action Methods
 
 - (IBAction)menuButtonAction:(id)sender {
     
-    UIButton *btn = sender;
+    [self.view layoutIfNeeded];
     
-    if (btn.tag == 1) {
-        StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    else {
-        [self.view layoutIfNeeded];
+    [UIView animateWithDuration:0.5 animations:^{
         
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            UIButton *menuButton = sender;
-            
-            if (menuButton.tag) {
-                // Hide Manu
-                _layoutConstraintMenuView_leading.constant = -ScreenHeight;
-                menuButton.tag = 0;
-            }
-            else {
-                // Show Manu
-                _layoutConstraintMenuView_leading.constant = 0;
-                menuButton.tag = 1;
-            }
-            
-            [self.view layoutIfNeeded];
-        }];
-
-    }
-}
-
-- (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton {
-    
+        UIButton *menuButton = sender;
+        
+        if (menuButton.tag) {
+            // Hide Manu
+            _layoutConstraintMenuView_leading.constant = -ScreenHeight;
+            menuButton.tag = 0;
+        }
+        else {
+            // Show Manu
+            _layoutConstraintMenuView_leading.constant = 0;
+            menuButton.tag = 1;
+        }
+        
+        [self.view layoutIfNeeded];
+    }];
 
 }
 
-- (void)drawFuelStationsAtMap {
-    
-    for (HomeMapStoreModelResponseObject *fuelStationPin in fuelStationBase.responseObject) {
-
-        // Creates a marker in the center of the map.
-        GMSMarker *marker = [[GMSMarker alloc] init];
-        marker.position = CLLocationCoordinate2DMake([fuelStationPin.lat doubleValue], [fuelStationPin.lon doubleValue]);
-        marker.title = fuelStationPin.name;
-        marker.snippet = fuelStationPin.address;
-        marker.icon = [UIImage imageNamed:@"map_pin"];
-//        marker.iconView = nil;
-        marker.appearAnimation = kGMSMarkerAnimationPop;
-        marker.userData = fuelStationPin;
-        marker.map = _mapView;
-    }
-}
-
-/*
-- (void)pushToParticulerClass:(NSString *)layoutType withurl:(NSString *)url header:(NSString *)header
-{
-
-}
-*/
+//- (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton {
+//
+//
+//}
 
 #pragma mark- API Requests
 
@@ -396,6 +375,36 @@
 //    [_mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds withPadding:60]];
     
     [self drawFuelStationsAtMap];
+}
+
+- (void)drawFuelStationsAtMap {
+    
+    for (HomeMapStoreModelResponseObject *fuelStationPin in fuelStationBase.responseObject) {
+        
+        // Creates a marker in the center of the map.
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = CLLocationCoordinate2DMake([fuelStationPin.lat doubleValue], [fuelStationPin.lon doubleValue]);
+        marker.title = fuelStationPin.name;
+        marker.snippet = fuelStationPin.address;
+        marker.icon = [UIImage imageNamed:@"map_pin"];
+        //        marker.iconView = nil;
+        marker.appearAnimation = kGMSMarkerAnimationPop;
+        marker.userData = fuelStationPin;
+        marker.map = _mapView;
+    }
+}
+
+
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
+    
+    StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
+    
+    HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
+    controller.storeId = fuelStationPin.responseObjectIdentifier;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+
+    return YES;
 }
 
 

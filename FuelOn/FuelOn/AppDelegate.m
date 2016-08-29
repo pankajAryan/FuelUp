@@ -27,8 +27,7 @@
     
     if (userId) {
         
-        self.rootNavController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
-        //[UINavigationController instantiateViewControllerWithIdentifier:@"rootNavController" fromStoryboard:@"Main"];
+        self.rootNavController = (UINavigationController*)self.window.rootViewController;
         
         HomeViewController *rootVC = [HomeViewController instantiateViewControllerWithIdentifier:@"HomeViewController" fromStoryboard:@"Main"];
         

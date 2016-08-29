@@ -11,6 +11,8 @@
 
 @interface StoreDetailViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic, strong) NSString *storeId;
+
 @property (weak, nonatomic) IBOutlet UITableView *table_storeDetail;
 @property (weak, nonatomic) IBOutlet UIView *view_tableHeader;
 @property (weak, nonatomic) IBOutlet GMSMapView *map_storeDetails;
