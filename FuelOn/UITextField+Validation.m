@@ -39,7 +39,7 @@
 
 -(BOOL)isMobileNumberValid
 {
-    if ([self.text length]>=10)
+    if ([self.text length] >= 11)
         return YES;
     else
         return NO;
@@ -156,7 +156,7 @@
     }
     else
     {
-        // This is logic is added because mobile can be empty. and if it is not empty, it should be 10 digit only.
+        // This is logic is added because mobile can be empty. and if it is not empty, it should be 11 digit only.
         if (validationTypes == eFieldValidationTypeMobileNumber){
             if (self.text.length == 0 ||
                 self.text.length == 11) {

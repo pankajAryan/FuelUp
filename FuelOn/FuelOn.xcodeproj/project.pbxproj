@@ -34,6 +34,11 @@
 		CE10B75D1D6A22B600080B3F /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10B7591D6A22B600080B3F /* ActionSheetStringPicker.m */; };
 		CE10B75E1D6A22B600080B3F /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10B75B1D6A22B600080B3F /* SWActionSheet.m */; };
 		CE15C09D1D7455CC004B56E4 /* StoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C09C1D7455CC004B56E4 /* StoreDetailViewController.m */; };
+		CE15C0AA1D747ADF004B56E4 /* StoreDetailBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0A11D747ADF004B56E4 /* StoreDetailBaseClass.m */; };
+		CE15C0AB1D747ADF004B56E4 /* StoreDetailOfferList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0A31D747ADF004B56E4 /* StoreDetailOfferList.m */; };
+		CE15C0AC1D747ADF004B56E4 /* StoreDetailProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0A51D747ADF004B56E4 /* StoreDetailProduct.m */; };
+		CE15C0AD1D747ADF004B56E4 /* StoreDetailProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0A71D747ADF004B56E4 /* StoreDetailProductList.m */; };
+		CE15C0AE1D747ADF004B56E4 /* StoreDetailResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0A91D747ADF004B56E4 /* StoreDetailResponseObject.m */; };
 		CE1D69471D72E718005BEA15 /* FuelStationBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D69401D72E718005BEA15 /* FuelStationBaseClass.m */; };
 		CE1D69481D72E718005BEA15 /* FuelStationProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D69421D72E718005BEA15 /* FuelStationProduct.m */; };
 		CE1D69491D72E718005BEA15 /* FuelStationProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D69441D72E718005BEA15 /* FuelStationProductList.m */; };
@@ -97,7 +102,17 @@
 		CE10B75B1D6A22B600080B3F /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
 		CE15C09B1D7455CC004B56E4 /* StoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailViewController.h; sourceTree = "<group>"; };
 		CE15C09C1D7455CC004B56E4 /* StoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailViewController.m; sourceTree = "<group>"; };
-		CE1D693E1D72E718005BEA15 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModels.h; sourceTree = "<group>"; };
+		CE15C0A01D747ADF004B56E4 /* StoreDetailBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailBaseClass.h; sourceTree = "<group>"; };
+		CE15C0A11D747ADF004B56E4 /* StoreDetailBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailBaseClass.m; sourceTree = "<group>"; };
+		CE15C0A21D747ADF004B56E4 /* StoreDetailOfferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailOfferList.h; sourceTree = "<group>"; };
+		CE15C0A31D747ADF004B56E4 /* StoreDetailOfferList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailOfferList.m; sourceTree = "<group>"; };
+		CE15C0A41D747ADF004B56E4 /* StoreDetailProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailProduct.h; sourceTree = "<group>"; };
+		CE15C0A51D747ADF004B56E4 /* StoreDetailProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailProduct.m; sourceTree = "<group>"; };
+		CE15C0A61D747ADF004B56E4 /* StoreDetailProductList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailProductList.h; sourceTree = "<group>"; };
+		CE15C0A71D747ADF004B56E4 /* StoreDetailProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailProductList.m; sourceTree = "<group>"; };
+		CE15C0A81D747ADF004B56E4 /* StoreDetailResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailResponseObject.h; sourceTree = "<group>"; };
+		CE15C0A91D747ADF004B56E4 /* StoreDetailResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailResponseObject.m; sourceTree = "<group>"; };
+		CE1D693E1D72E718005BEA15 /* DataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataModels.h; path = FuelStationModels/DataModels.h; sourceTree = "<group>"; };
 		CE1D693F1D72E718005BEA15 /* FuelStationBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuelStationBaseClass.h; sourceTree = "<group>"; };
 		CE1D69401D72E718005BEA15 /* FuelStationBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuelStationBaseClass.m; sourceTree = "<group>"; };
 		CE1D69411D72E718005BEA15 /* FuelStationProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuelStationProduct.h; sourceTree = "<group>"; };
@@ -193,10 +208,36 @@
 			path = ActionSheetPicker;
 			sourceTree = "<group>";
 		};
-		CE1D693D1D72E718005BEA15 /* FuelStationModels */ = {
+		CE15C09E1D747ADF004B56E4 /* StoreDetailModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE15C0A01D747ADF004B56E4 /* StoreDetailBaseClass.h */,
+				CE15C0A11D747ADF004B56E4 /* StoreDetailBaseClass.m */,
+				CE15C0A21D747ADF004B56E4 /* StoreDetailOfferList.h */,
+				CE15C0A31D747ADF004B56E4 /* StoreDetailOfferList.m */,
+				CE15C0A41D747ADF004B56E4 /* StoreDetailProduct.h */,
+				CE15C0A51D747ADF004B56E4 /* StoreDetailProduct.m */,
+				CE15C0A61D747ADF004B56E4 /* StoreDetailProductList.h */,
+				CE15C0A71D747ADF004B56E4 /* StoreDetailProductList.m */,
+				CE15C0A81D747ADF004B56E4 /* StoreDetailResponseObject.h */,
+				CE15C0A91D747ADF004B56E4 /* StoreDetailResponseObject.m */,
+			);
+			path = StoreDetailModel;
+			sourceTree = "<group>";
+		};
+		CE15C0AF1D747B06004B56E4 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
 				CE1D693E1D72E718005BEA15 /* DataModels.h */,
+				CE15C09E1D747ADF004B56E4 /* StoreDetailModel */,
+				CE1D693D1D72E718005BEA15 /* FuelStationModels */,
+			);
+			name = DataModels;
+			sourceTree = "<group>";
+		};
+		CE1D693D1D72E718005BEA15 /* FuelStationModels */ = {
+			isa = PBXGroup;
+			children = (
 				CE1D693F1D72E718005BEA15 /* FuelStationBaseClass.h */,
 				CE1D69401D72E718005BEA15 /* FuelStationBaseClass.m */,
 				CE1D69411D72E718005BEA15 /* FuelStationProduct.h */,
@@ -263,7 +304,7 @@
 		CEAFE6AD1D68A13400F36B08 /* FuelOn */ = {
 			isa = PBXGroup;
 			children = (
-				CE1D693D1D72E718005BEA15 /* FuelStationModels */,
+				CE15C0AF1D747B06004B56E4 /* DataModels */,
 				CEB886911D71F3CB008A3E44 /* Constants */,
 				CEAFE6B11D68A13400F36B08 /* AppDelegate.h */,
 				CEAFE6B21D68A13400F36B08 /* AppDelegate.m */,
@@ -471,17 +512,22 @@
 				CE1D69481D72E718005BEA15 /* FuelStationProduct.m in Sources */,
 				CEB8867F1D71EF01008A3E44 /* HomeViewController.m in Sources */,
 				CE1D694E1D730710005BEA15 /* CLLocationManager+blocks.m in Sources */,
+				CE15C0AB1D747ADF004B56E4 /* StoreDetailOfferList.m in Sources */,
 				CE1D69491D72E718005BEA15 /* FuelStationProductList.m in Sources */,
 				CEB8868F1D71F2CA008A3E44 /* RESideMenu.m in Sources */,
 				CEAFE6D01D68BDB700F36B08 /* LoginViewController.m in Sources */,
 				CE10B75E1D6A22B600080B3F /* SWActionSheet.m in Sources */,
 				CE15C09D1D7455CC004B56E4 /* StoreDetailViewController.m in Sources */,
 				CEAFE6B31D68A13400F36B08 /* AppDelegate.m in Sources */,
+				CE15C0AA1D747ADF004B56E4 /* StoreDetailBaseClass.m in Sources */,
 				CE0B92CC1D69E88E00149FA4 /* FFValidationResult.m in Sources */,
 				CEB886901D71F2CA008A3E44 /* UIViewController+RESideMenu.m in Sources */,
+				CE15C0AC1D747ADF004B56E4 /* StoreDetailProduct.m in Sources */,
 				CEAFE6B01D68A13400F36B08 /* main.m in Sources */,
+				CE15C0AE1D747ADF004B56E4 /* StoreDetailResponseObject.m in Sources */,
 				CE1D69471D72E718005BEA15 /* FuelStationBaseClass.m in Sources */,
 				CEAFE6CB1D68A34400F36B08 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				CE15C0AD1D747ADF004B56E4 /* StoreDetailProductList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

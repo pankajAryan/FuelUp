@@ -77,7 +77,7 @@
     
     if (textField == _txtFieldMobile) {
         NSString *mobile = [NSString stringWithFormat:@"%@%@",textField.text, string];
-        if (mobile.length > 10) {
+        if (mobile.length > 11) {
             return NO;
         }else{
             NSCharacterSet *blockedCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
@@ -98,7 +98,7 @@
         [self showAlert:@"All input fields are mandatory!"];
     }
     else if (!_txtFieldMobile.isMobileNumberValid) {
-        [self showAlert:@"Mobile must contain 10 characters!"];
+        [self showAlert:@"Mobile must contain 11 characters!"];
     }
     else if (!_txtFieldEmail.isEmailValid) {
         [self showAlert:@"Invalid Email address!"];
@@ -160,8 +160,11 @@
                     
                     if ([[responseDict objectForKey:@"errorMessage"] isEqualToString:@"Success"]) {
                         
-                        [self showAlert:@"Registration successful!"];
-                        [self.navigationController popViewControllerAnimated:YES];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self showAlert:@"Registration successful!"];
+                            [self.navigationController popViewControllerAnimated:YES];
+                        });
                     }
                 }
             }
