@@ -7,7 +7,8 @@
 //
 
 #import "TabBarView.h"
-
+#import "Reachability.h"
+#import "UIViewController+Utility.h"
 
 @interface TabBarView()
 
@@ -114,85 +115,91 @@
 
 - (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton {
     
-    switch (selectedButton.tag) {
-            
-        case 0:
-            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:YES]];
-            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
-            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
-            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
-            
-            _containerViewItem1.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
-            _containerViewItem2.backgroundColor = [UIColor clearColor];
-            _containerViewItem3.backgroundColor = [UIColor clearColor];
-            _containerViewItem4.backgroundColor = [UIColor clearColor];
-            
-            _item1Label.textColor = [UIColor whiteColor];
-            _item2Label.textColor = [UIColor blackColor];
-            _item3Label.textColor = [UIColor blackColor];
-            _item4Label.textColor = [UIColor blackColor];
-
-            break;
-            
-        case 1:
-            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
-            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:YES]];
-            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
-            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
-            
-            _containerViewItem1.backgroundColor = [UIColor clearColor];
-            _containerViewItem2.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
-            _containerViewItem3.backgroundColor = [UIColor clearColor];
-            _containerViewItem4.backgroundColor = [UIColor clearColor];
-
-            _item1Label.textColor = [UIColor blackColor];
-            _item2Label.textColor = [UIColor whiteColor];
-            _item3Label.textColor = [UIColor blackColor];
-            _item4Label.textColor = [UIColor blackColor];
-
-            break;
-            
-        case 2:
-            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
-            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
-            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:YES]];
-            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
-            
-            _containerViewItem1.backgroundColor = [UIColor clearColor];
-            _containerViewItem2.backgroundColor = [UIColor clearColor];
-            _containerViewItem3.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
-            _containerViewItem4.backgroundColor = [UIColor clearColor];
-
-            _item1Label.textColor = [UIColor blackColor];
-            _item2Label.textColor = [UIColor blackColor];
-            _item3Label.textColor = [UIColor whiteColor];
-            _item4Label.textColor = [UIColor blackColor];
-
-            break;
-            
-        case 3:
-            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
-            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
-            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
-            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:YES]];
-            
-            _containerViewItem1.backgroundColor = [UIColor clearColor];
-            _containerViewItem2.backgroundColor = [UIColor clearColor];
-            _containerViewItem3.backgroundColor = [UIColor clearColor];
-            _containerViewItem4.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
-
-            _item1Label.textColor = [UIColor blackColor];
-            _item2Label.textColor = [UIColor blackColor];
-            _item3Label.textColor = [UIColor blackColor];
-            _item4Label.textColor = [UIColor whiteColor];
-
-            break;
-            
-        default:
-            break;
+    if ([UIViewController isNetworkAvailable])
+    {
+        switch (selectedButton.tag) {
+                
+            case 0:
+                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:YES]];
+                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
+                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
+                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
+                
+                _containerViewItem1.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                _containerViewItem2.backgroundColor = [UIColor clearColor];
+                _containerViewItem3.backgroundColor = [UIColor clearColor];
+                _containerViewItem4.backgroundColor = [UIColor clearColor];
+                
+                _item1Label.textColor = [UIColor whiteColor];
+                _item2Label.textColor = [UIColor blackColor];
+                _item3Label.textColor = [UIColor blackColor];
+                _item4Label.textColor = [UIColor blackColor];
+                
+                break;
+                
+            case 1:
+                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:YES]];
+                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
+                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
+                
+                _containerViewItem1.backgroundColor = [UIColor clearColor];
+                _containerViewItem2.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                _containerViewItem3.backgroundColor = [UIColor clearColor];
+                _containerViewItem4.backgroundColor = [UIColor clearColor];
+                
+                _item1Label.textColor = [UIColor blackColor];
+                _item2Label.textColor = [UIColor whiteColor];
+                _item3Label.textColor = [UIColor blackColor];
+                _item4Label.textColor = [UIColor blackColor];
+                
+                break;
+                
+            case 2:
+                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
+                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:YES]];
+                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
+                
+                _containerViewItem1.backgroundColor = [UIColor clearColor];
+                _containerViewItem2.backgroundColor = [UIColor clearColor];
+                _containerViewItem3.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                _containerViewItem4.backgroundColor = [UIColor clearColor];
+                
+                _item1Label.textColor = [UIColor blackColor];
+                _item2Label.textColor = [UIColor blackColor];
+                _item3Label.textColor = [UIColor whiteColor];
+                _item4Label.textColor = [UIColor blackColor];
+                
+                break;
+                
+            case 3:
+                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
+                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
+                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:YES]];
+                
+                _containerViewItem1.backgroundColor = [UIColor clearColor];
+                _containerViewItem2.backgroundColor = [UIColor clearColor];
+                _containerViewItem3.backgroundColor = [UIColor clearColor];
+                _containerViewItem4.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                
+                _item1Label.textColor = [UIColor blackColor];
+                _item2Label.textColor = [UIColor blackColor];
+                _item3Label.textColor = [UIColor blackColor];
+                _item4Label.textColor = [UIColor whiteColor];
+                
+                break;
+                
+            default:
+                break;
+        }
+        
+        self.tabBarItemSelectionCallback(selectedButton.tag);
     }
-    
-    self.tabBarItemSelectionCallback(selectedButton.tag);
+    else {
+        [UIViewController showAlert:@"No internet available!"];
+    }
 }
 
 

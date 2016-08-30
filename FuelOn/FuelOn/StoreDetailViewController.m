@@ -86,25 +86,25 @@
                                 {
                                     case 0:
                                         _label_regularTitle.text = product.product.productName;
-                                        _label_regularValue.text = product.cost;
+                                        _label_regularValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
                                         
                                         break;
                                         
                                     case 1:
                                         _label_mediumTitle.text = product.product.productName;
-                                        _label_mediumValue.text = product.cost;
+                                        _label_mediumValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
                                         
                                         break;
                                         
                                     case 2:
                                         _label_premiumTitle.text = product.product.productName;
-                                        _label_premiumValue.text = product.cost;
+                                        _label_premiumValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
                                         
                                         break;
                                         
                                     case 3:
                                         _label_dieselTitle.text = product.product.productName;
-                                        _label_dieselValue.text = product.cost;
+                                        _label_dieselValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
                                         
                                         break;
                                         
@@ -182,7 +182,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 5;//storeDetailBase.responseObject.offerList.count;
+    return storeDetailBase.responseObject.offerList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -194,7 +194,7 @@
         offerCell = [[StoreDetailCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    StoreDetailOfferList *offer = [storeDetailBase.responseObject.offerList objectAtIndex:0]; // indexPath.row
+    StoreDetailOfferList *offer = [storeDetailBase.responseObject.offerList objectAtIndex:indexPath.row];
     offerCell.label_price.text = [NSString stringWithFormat:@"%@ cents off",offer.discountOffer];
     offerCell.label_title.text = offer.offerName;
     offerCell.label_titleValue.text = offer.condition;

@@ -166,11 +166,6 @@
 
 }
 
-//- (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton {
-//
-//
-//}
-
 #pragma mark- API Requests
 
 - (void)fetchProducts {
@@ -281,8 +276,8 @@
             
             *stopUpdating = YES;
             
-//            if (location)
-//            {
+            if (location)
+            {
                 lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
                 lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
                 
@@ -303,8 +298,8 @@
                     components.path = @"/FuelONServer/rest/service/getStoresForProductNearBy";
                     
                     NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"productId" value:productId];
-                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:@"-36.908655"]; //lat // @"28.7072344"  -36.908655
-                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:@"174.9392557"]; // lon // @"77.2104811"
+                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:lat]; // // @"28.7072344"  -36.908655
+                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:lon]; //  // @"77.2104811"
                     
                     components.queryItems = @[item1,item2,item3];
                     
@@ -350,11 +345,13 @@
                 else {
                     [self showAlert:@"No internet available!"];
                 }
-//            }
+            }
+            else
+                [self showAlert:@"Could not determine your location. Please check location settings."];
         }];
     }
     else {
-        //[self callApitoGetShowroom];
+        [self showAlert:@"Please enable location services from settings."];
     }
 }
 
@@ -362,9 +359,9 @@
 
 - (void)loadMapView
 {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-36.908655
-                                                                longitude:174.9392557
-                                                                     zoom:14]; // [lat floatValue] // [lon floatValue]
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
+                                                                longitude:[lon floatValue]
+                                                                     zoom:12]; //  -36.908655 //  174.9392557
     
    // _mapView = [GMSMapView mapWithFrame:_mapView.bounds camera:camera];
     _mapView.camera = camera;
@@ -413,12 +410,18 @@
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
     
-    StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
-    
-    HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
-    controller.storeId = fuelStationPin.responseObjectIdentifier;
-    
-    [self.navigationController pushViewController:controller animated:YES];
+    if ([UIViewController isNetworkAvailable])
+    {
+        StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
+        
+        HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
+        controller.storeId = fuelStationPin.responseObjectIdentifier;
+        
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else {
+        [self showAlert:@"No internet available!"];
+    }
 
     return YES;
 }
@@ -432,7 +435,6 @@
         [self menuButtonAction:_menuButton];
     }
 }
-
 
 - (IBAction)pushDetailVC {
     

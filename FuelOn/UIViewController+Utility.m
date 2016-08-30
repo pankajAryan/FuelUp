@@ -27,7 +27,7 @@
     HUD.detailsLabelText = @"Please wait...";
     HUD.mode = MBProgressHUDModeIndeterminate;
     HUD.removeFromSuperViewOnHide = YES;
-    HUD.tag = 121;
+    HUD.tag = 501;
     [self.view addSubview:HUD];
     [HUD show:YES];
 }
@@ -37,7 +37,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        MBProgressHUD*  HUD = (MBProgressHUD*)[self.view viewWithTag:121];
+        MBProgressHUD*  HUD = (MBProgressHUD*)[self.view viewWithTag:501];
         if(HUD !=nil)
         {
             [HUD hide:YES afterDelay:delay];
@@ -162,6 +162,15 @@
 */
 #pragma mark- UIAlertView Display Methods
 #pragma mark-
+
++ (void)showAlert:(NSString *)message {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    });
+}
 
 - (void)showAlert:(NSString *)message{
     

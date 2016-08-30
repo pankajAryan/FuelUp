@@ -692,9 +692,6 @@
                                             <constraint firstAttribute="width" constant="34" id="GRd-Zj-9Aq"/>
                                         </constraints>
                                         <state key="normal" image="search"/>
-                                        <connections>
-                                            <action selector="menuButtonAction:" destination="k2Q-NJ-vft" eventType="touchUpInside" id="ukX-tL-hOc"/>
-                                        </connections>
                                     </button>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="top_logo" translatesAutoresizingMaskIntoConstraints="NO" id="HAR-pT-3kb">
                                         <rect key="frame" x="92" y="12" width="141" height="50"/>
@@ -722,9 +719,6 @@
                                             <constraint firstAttribute="width" constant="34" id="0VF-Zk-6ZA"/>
                                         </constraints>
                                         <state key="normal" image="map_icon"/>
-                                        <connections>
-                                            <action selector="pushDetailVC" destination="k2Q-NJ-vft" eventType="touchUpInside" id="h3s-u7-Ehd"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.33725490196078434" green="0.1764705882352941" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
@@ -1376,13 +1370,13 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Sore Name: BP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGh-Fv-Uel">
-                                                        <rect key="frame" x="36" y="0.0" width="248" height="36"/>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Sore Name: BP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="sGh-Fv-Uel">
+                                                        <rect key="frame" x="25" y="0.0" width="270" height="36"/>
                                                         <color key="backgroundColor" red="0.43137254899999999" green="0.12941176469999999" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="36" id="WO4-fq-yQ2"/>
                                                             <constraint firstAttribute="height" constant="36" id="kfy-0N-1OX"/>
-                                                            <constraint firstAttribute="width" constant="248" id="q5k-vQ-FfI"/>
+                                                            <constraint firstAttribute="width" constant="270" id="q5k-vQ-FfI"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1453,7 +1447,7 @@
                                             <constraint firstAttribute="height" constant="21" id="6zz-80-Kuj"/>
                                             <constraint firstAttribute="width" constant="320" id="mEv-ag-U1G"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">

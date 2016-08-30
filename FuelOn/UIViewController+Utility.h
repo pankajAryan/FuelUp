@@ -21,6 +21,7 @@
 +(BOOL)isNetworkAvailable;
 
 // UIAlertView Display Methods
++ (void)showAlert:(NSString *)message;
 -(void) showAlert:(NSString *)message;
 -(void) showCancelAlert:(NSString *)message;
 - (void)showCancelAlertWithTitle:(NSString *)title message:(NSString *)message alertTag:(NSInteger)tag;
