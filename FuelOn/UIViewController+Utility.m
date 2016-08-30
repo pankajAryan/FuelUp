@@ -8,7 +8,8 @@
 
 #import "UIViewController+Utility.h"
 #import "MBProgressHUD.h"
- 
+#import "Reachability.h"
+
 @implementation UIViewController (Utility)
 
 + (instancetype)instantiateViewControllerWithIdentifier:(NSString*)sceneId fromStoryboard:(NSString*)storyboardName {
@@ -43,6 +44,24 @@
             HUD = nil;
         }
     });
+}
+
++(BOOL)isNetworkAvailable
+{
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    
+    if (networkStatus == NotReachable)
+    {
+        NSLog(@"There iS NO internet connection");
+        return false;
+        
+    } else {
+        
+        NSLog(@"There iS internet connection available");
+        return true;
+    }
+    return false;
 }
 
 #pragma mark- Error And Alert Messages
@@ -146,8 +165,11 @@
 
 - (void)showAlert:(NSString *)message{
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alertView show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    });
 }
 
 - (void)showCancelAlert:(NSString *)message {
@@ -198,6 +220,30 @@
     
     return data;
 }
+
+#pragma mark- Project specific
+
+- (UIImage*)getImageForBrand:(NSString*)brand {
+    
+    if ([brand compare:@"Gull" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        return [UIImage imageNamed:@"gull_pin"];
+    }
+    else if ([brand compare:@"Z" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        return [UIImage imageNamed:@"z_pin"];
+    }
+    if ([brand compare:@"Mobil" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        return [UIImage imageNamed:@"mobil_pin"];
+    }
+    if ([brand compare:@"BP" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        return [UIImage imageNamed:@"bp_pin"];
+    }
+    if ([brand compare:@"Caltex" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        return [UIImage imageNamed:@"caltex_pin"];
+    }
+    else
+        return [UIImage imageNamed:@"map_pin"];
+}
+
 
 
 @end

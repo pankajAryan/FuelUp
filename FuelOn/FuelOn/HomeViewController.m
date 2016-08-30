@@ -15,6 +15,7 @@
 #import "DataModels.h"
 #import "CLLocationManager+blocks.h"
 #import "StoreDetailViewController.h"
+#import "PinAnnotationView.h"
 
 @interface HomeViewController() {
     
@@ -149,17 +150,15 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         
-        UIButton *menuButton = sender;
-        
-        if (menuButton.tag) {
+        if (_menuButton.tag) {
             // Hide Manu
             _layoutConstraintMenuView_leading.constant = -ScreenHeight;
-            menuButton.tag = 0;
+            _menuButton.tag = 0;
         }
         else {
             // Show Manu
             _layoutConstraintMenuView_leading.constant = 0;
-            menuButton.tag = 1;
+            _menuButton.tag = 1;
         }
         
         [self.view layoutIfNeeded];
@@ -176,96 +175,100 @@
 
 - (void)fetchProducts {
     
-    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
-    // http://128.199.129.241:8080/FuelOnServer/rest/service
-    NSURLComponents *components = [[NSURLComponents alloc]init]; //
-    components.scheme = @"http";
-    components.host = @"128.199.129.241";
-    components.port = [NSNumber numberWithInteger:8080];
-    components.path = @"/FuelONServer/rest/service/getProductList";
-    
-    NSURL *url = components.URL;
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:10.0];
-    
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setHTTPMethod:@"POST"];
-    
-    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    if ([UIViewController isNetworkAvailable])
+    {
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+        // http://128.199.129.241:8080/FuelOnServer/rest/service
+        NSURLComponents *components = [[NSURLComponents alloc]init]; //
+        components.scheme = @"http";
+        components.host = @"128.199.129.241";
+        components.port = [NSNumber numberWithInteger:8080];
+        components.path = @"/FuelONServer/rest/service/getProductList";
         
-        if (!error) {
-            NSError *localError = nil;
+        NSURL *url = components.URL;
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                           timeoutInterval:10.0];
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setHTTPMethod:@"POST"];
+        
+        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
-            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
-            
-            if (localError == nil) {
+            if (!error) {
+                NSError *localError = nil;
                 
-                NSLog(@"Response = %@",responseDict);
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
                 
-                if ([[responseDict objectForKey:@"errorMessage"] isEqualToString:@"Success"]) {
+                if (localError == nil) {
                     
-                    NSMutableArray *fetchedProducts = [[responseDict objectForKey:@"responseObject"] mutableCopy];
+                    NSLog(@"Response = %@",responseDict);
                     
-                    NSString *favProductId = [UIViewController retrieveDataFromUserDefault:@"favProductId"];
-                    
-                    if (favProductId && favProductId.length) {
+                    if ([[responseDict objectForKey:@"errorCode"] integerValue] == 0) {
                         
-                        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"productId CONTAINS[cd]%@", favProductId];
-                        NSArray *filteredArray = [fetchedProducts filteredArrayUsingPredicate:predicate];
+                        NSMutableArray *fetchedProducts = [[responseDict objectForKey:@"responseObject"] mutableCopy];
                         
-                        NSInteger index = [fetchedProducts indexOfObject:[filteredArray objectAtIndex:0]];
+                        NSString *favProductId = [UIViewController retrieveDataFromUserDefault:@"favProductId"];
                         
-                        [fetchedProducts removeObjectAtIndex:index];
-                        [fetchedProducts insertObject:[filteredArray objectAtIndex:0] atIndex:0];
-                    }
-                    
-                    products = [fetchedProducts copy];
-                   
-                    dispatch_async(dispatch_get_main_queue(), ^{
-
-                        //[self showProgressHudWithMessage:@""];
-                        [self fetchFuelStationsForSelectedType:0];
-                        
-                        [self.tabBar setTabItemsLayoutWithProducts:products];
-                        
-                        self.tabBar.tabBarItemSelectionCallback = ^(NSInteger selectedItemIndex){
+                        if (favProductId && favProductId.length) {
                             
-                            [self fetchFuelStationsForSelectedType:selectedItemIndex];
-                        };
-                    
-                        [self.view addSubview:_tabBar];
-                        [self.view sendSubviewToBack:_tabBar];
-                        //_tabBar.frame = CGRectMake(0, 0, _tabBarContainer.frame.size.width, 60);
+                            NSPredicate * predicate = [NSPredicate predicateWithFormat:@"productId CONTAINS[cd]%@", favProductId];
+                            NSArray *filteredArray = [fetchedProducts filteredArrayUsingPredicate:predicate];
+                            
+                            NSInteger index = [fetchedProducts indexOfObject:[filteredArray objectAtIndex:0]];
+                            
+                            [fetchedProducts removeObjectAtIndex:index];
+                            [fetchedProducts insertObject:[filteredArray objectAtIndex:0] atIndex:0];
+                        }
                         
-                        NSLayoutConstraint *leadingContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeLeadingMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeadingMargin multiplier:1 constant:-8];
+                        products = [fetchedProducts copy];
                         
-                        NSLayoutConstraint *trailingContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeTrailingMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailingMargin multiplier:1 constant:8];
-                        
-                        //pin 100 points from the top of the super
-                        NSLayoutConstraint *bottomContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:-8];
-                        
-                        NSLayoutConstraint *heightContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
-                        //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
-                        //to false.
-                        [_tabBar setTranslatesAutoresizingMaskIntoConstraints:NO];
-                        
-                        //IOS 8
-                        //activate the constrains.
-                        //we pass an array of all the contraints
-                        [NSLayoutConstraint activateConstraints:@[leadingContraints,trailingContraints,bottomContraints,heightContraints]];
-                        
-                    });
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self fetchFuelStationsForSelectedType:0];
+                            
+                            [self.tabBar setTabItemsLayoutWithProducts:products];
+                            
+                            self.tabBar.tabBarItemSelectionCallback = ^(NSInteger selectedItemIndex){
+                                
+                                [self fetchFuelStationsForSelectedType:selectedItemIndex];
+                            };
+                            
+                            [self.view addSubview:_tabBar];
+                            [self.view sendSubviewToBack:_tabBar];
+                            //_tabBar.frame = CGRectMake(0, 0, _tabBarContainer.frame.size.width, 60);
+                            
+                            NSLayoutConstraint *leadingContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeLeadingMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeadingMargin multiplier:1 constant:-8];
+                            
+                            NSLayoutConstraint *trailingContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeTrailingMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailingMargin multiplier:1 constant:8];
+                            
+                            //pin 100 points from the top of the super
+                            NSLayoutConstraint *bottomContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:-8];
+                            
+                            NSLayoutConstraint *heightContraints = [NSLayoutConstraint constraintWithItem:_tabBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:60];
+                            //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
+                            //to false.
+                            [_tabBar setTranslatesAutoresizingMaskIntoConstraints:NO];
+                            
+                            //IOS 8
+                            //activate the constrains.
+                            //we pass an array of all the contraints
+                            [NSLayoutConstraint activateConstraints:@[leadingContraints,trailingContraints,bottomContraints,heightContraints]];
+                            
+                        });
+                    }
                 }
             }
-        }
-    }];
-    
-    [postDataTask resume];
+        }];
+        
+        [postDataTask resume];
+    }
+    else {
+        [self showAlert:@"No internet available!"];
+    }
 }
 
 - (void)fetchFuelStationsForSelectedType:(NSInteger)index {
@@ -278,70 +281,76 @@
             
             *stopUpdating = YES;
             
-            if (location)
-            {
+//            if (location)
+//            {
                 lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
                 lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
                 
                 NSDictionary *productDict = [products objectAtIndex:index];
                 NSString *productId = [productDict objectForKey:@"productId"];
-                
-                NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-                
-                NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
-                // http://128.199.129.241:8080/FuelOnServer/rest/service
-                NSURLComponents *components = [[NSURLComponents alloc]init]; //
-                components.scheme = @"http";
-                components.host = @"128.199.129.241";
-                components.port = [NSNumber numberWithInteger:8080];
-                components.path = @"/FuelONServer/rest/service/getStoresForProductNearBy";
-                
-                NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"productId" value:productId];
-                NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:lat]; // @"28.7072344"
-                NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:lon]; // @"77.2104811"
-                
-                components.queryItems = @[item1,item2,item3];
-                
-                NSURL *url = components.URL;
-                
-                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                                   timeoutInterval:10.0];
-                
-                [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-                [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-                [request setHTTPMethod:@"POST"];
-                
-                NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
+                if ([UIViewController isNetworkAvailable])
+                {
+                    [self showProgressHudWithMessage:@""];
+
+                    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+                    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+                    // http://128.199.129.241:8080/FuelOnServer/rest/service
+                    NSURLComponents *components = [[NSURLComponents alloc]init]; //
+                    components.scheme = @"http";
+                    components.host = @"128.199.129.241";
+                    components.port = [NSNumber numberWithInteger:8080];
+                    components.path = @"/FuelONServer/rest/service/getStoresForProductNearBy";
                     
-                    //[self removeHudAfterDelay:0.1];
+                    NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"productId" value:productId];
+                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:@"-36.908655"]; //lat // @"28.7072344"  -36.908655
+                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:@"174.9392557"]; // lon // @"77.2104811"
                     
-                    if (!error) {
-                        NSError *localError = nil;
+                    components.queryItems = @[item1,item2,item3];
+                    
+                    NSURL *url = components.URL;
+                    
+                    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                       timeoutInterval:10.0];
+                    
+                    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+                    [request setHTTPMethod:@"POST"];
+                    
+                    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                         
-                        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
+                        [self removeHudAfterDelay:0.1];
                         
-                        if (localError == nil) {
+                        if (!error) {
+                            NSError *localError = nil;
                             
-                            NSLog(@"Response = %@",responseDict);
-                            fuelStationBase = [[HomeMapStoreModelBaseClass alloc] initWithDictionary:responseDict];
+                            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
                             
-                            if ([fuelStationBase.errorMessage isEqualToString:@"Success"]) {
+                            if (localError == nil) {
                                 
-                                dispatch_async(dispatch_get_main_queue(), ^{
+                                NSLog(@"Response = %@",responseDict);
+                                fuelStationBase = [[HomeMapStoreModelBaseClass alloc] initWithDictionary:responseDict];
+                                
+                                if ([fuelStationBase.errorMessage isEqualToString:@"Success"]) {
                                     
-                                    [_mapView clear];
-                                    
-                                    [self loadMapView];
-                                });
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        
+                                        [_mapView clear];
+                                        
+                                        [self loadMapView];
+                                    });
+                                }
                             }
                         }
-                    }
-                }];
-                
-                [postDataTask resume];
-
-            }
+                    }];
+                    
+                    [postDataTask resume];
+                }
+                else {
+                    [self showAlert:@"No internet available!"];
+                }
+//            }
         }];
     }
     else {
@@ -353,9 +362,9 @@
 
 - (void)loadMapView
 {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
-                                                                longitude:[lon floatValue]
-                                                                     zoom:13];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-36.908655
+                                                                longitude:174.9392557
+                                                                     zoom:14]; // [lat floatValue] // [lon floatValue]
     
    // _mapView = [GMSMapView mapWithFrame:_mapView.bounds camera:camera];
     _mapView.camera = camera;
@@ -367,8 +376,8 @@
     _mapView.settings.zoomGestures = YES;
     _mapView.settings.compassButton = YES;
     _mapView.settings.myLocationButton = NO;
-    //    [googleMaps setMinZoom:5 maxZoom:11];
     
+    //    [googleMaps setMinZoom:5 maxZoom:11];
 //    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(28.7072344, 77.2104811);
 //    // this will set the camera on goggle maps such that specified bounds are centered on screen at the greatest possible zoom level
 //    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:coordinate coordinate:coordinate];
@@ -384,10 +393,17 @@
         // Creates a marker in the center of the map.
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake([fuelStationPin.lat doubleValue], [fuelStationPin.lon doubleValue]);
-        marker.title = fuelStationPin.name;
-        marker.snippet = fuelStationPin.address;
-        marker.icon = [UIImage imageNamed:@"map_pin"];
-        //        marker.iconView = nil;
+        
+        PinAnnotationView *pin = [[PinAnnotationView alloc]initWithFrame:CGRectMake(0, 0, 62, 70)];
+        pin.imageView.image = [self getImageForBrand:fuelStationPin.brand];
+
+        if (fuelStationPin.productList.count)
+        {
+            HomeMapStoreModelProductList *product = [fuelStationPin.productList objectAtIndex:0];
+            pin.label_price.text = [NSString stringWithFormat:@"$%@",product.cost];
+        }
+        
+        marker.iconView = pin;
         marker.appearAnimation = kGMSMarkerAnimationPop;
         marker.userData = fuelStationPin;
         marker.map = _mapView;
@@ -407,5 +423,25 @@
     return YES;
 }
 
+- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
+    
+    // Use for dismissing menu (If in open state)
+    
+    if (_menuButton.tag) {
+        // Hide Manu
+        [self menuButtonAction:_menuButton];
+    }
+}
+
+
+- (IBAction)pushDetailVC {
+    
+    StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
+    
+//    HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
+    controller.storeId = @"1";//fuelStationPin.responseObjectIdentifier;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 @end

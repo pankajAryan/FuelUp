@@ -64,66 +64,74 @@
     else {
         // Login API
         
-        [self showProgressHudWithMessage:@"Logging-in"];
-
-        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
-        
-        NSURLComponents *components = [[NSURLComponents alloc]init];
-        components.scheme = @"http";
-        components.host = @"128.199.129.241";
-        components.port = [NSNumber numberWithInteger:8080];
-        components.path = @"/FuelONServer/rest/service/login";
-        
-        NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"email" value:_txtFieldEmail.text];
-        NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"password" value:_txtFieldPassword.text];
-
-        components.queryItems = @[item1,item2];
-        
-        NSURL *url = components.URL;
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                           timeoutInterval:10.0];
-        
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [request setHTTPMethod:@"POST"];
-        
-        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([UIViewController isNetworkAvailable])
+        {
+            [self showProgressHudWithMessage:@"Logging-in"];
             
-            [self removeHudAfterDelay:0.1];
-
-            if (!error) {
-                NSError *localError = nil;
+            NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+            
+            NSURLComponents *components = [[NSURLComponents alloc]init];
+            components.scheme = @"http";
+            components.host = @"128.199.129.241";
+            components.port = [NSNumber numberWithInteger:8080];
+            components.path = @"/FuelONServer/rest/service/login";
+            
+            NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"email" value:_txtFieldEmail.text];
+            NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"password" value:_txtFieldPassword.text];
+            
+            components.queryItems = @[item1,item2];
+            
+            NSURL *url = components.URL;
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                               timeoutInterval:10.0];
+            
+            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+            [request setHTTPMethod:@"POST"];
+            
+            NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
-                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
+                [self removeHudAfterDelay:0.1];
                 
-                if (localError == nil) {
+                if (!error) {
+                    NSError *localError = nil;
                     
-                    NSLog(@"Response = %@",responseDict);
+                    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
                     
-                    if ([[responseDict objectForKey:@"errorMessage"] isEqualToString:@"Success"]) {
+                    if (localError == nil) {
                         
-                        [UIViewController saveDatatoUserDefault:[[responseDict objectForKey:@"responseObject"] objectForKey:@"favoriteProduct"] forKey:@"favProductId"];
+                        NSLog(@"Response = %@",responseDict);
                         
-                        [UIViewController saveDatatoUserDefault:[[responseDict objectForKey:@"responseObject"] objectForKey:@"userId"] forKey:@"userId"];
-
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                        if ([[responseDict objectForKey:@"errorCode"] integerValue] == 0) {
                             
-                            HomeViewController *homeController = (HomeViewController*)[HomeViewController instantiateViewControllerWithIdentifier:@"HomeViewController" fromStoryboard:@"Main"];
-                            [self.navigationController pushViewController:homeController animated:YES];
-                        });
-                        
-                        //[self showAlert:@"Login successful!"];
-                        //[self addTabBarContollerWithData:[responseDict objectForKey:@"responseObject"]];
+                            [UIViewController saveDatatoUserDefault:[[responseDict objectForKey:@"responseObject"] objectForKey:@"favoriteProduct"] forKey:@"favProductId"];
+                            
+                            [UIViewController saveDatatoUserDefault:[[responseDict objectForKey:@"responseObject"] objectForKey:@"userId"] forKey:@"userId"];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                HomeViewController *homeController = (HomeViewController*)[HomeViewController instantiateViewControllerWithIdentifier:@"HomeViewController" fromStoryboard:@"Main"];
+                                [self.navigationController pushViewController:homeController animated:YES];
+                            });
+                            
+                            //[self showAlert:@"Login successful!"];
+                            //[self addTabBarContollerWithData:[responseDict objectForKey:@"responseObject"]];
+                        }
+                        else {
+                            [self showAlert:@"Invalid Credentials!"];
+                        }
                     }
                 }
-            }
-        }];
-        
-        [postDataTask resume];
+            }];
+            
+            [postDataTask resume];
+        }
+        else {
+            [self showAlert:@"No internet available!"];
+        }
     }
 }
 

@@ -22,48 +22,53 @@
  //   [[self navigationController] setNavigationBarHidden:NO animated:YES];
 
     selectedIndex = -1; // by default invalid value to be set.
+    
+    if ([UIViewController isNetworkAvailable])
+    {
+        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+        // http://128.199.129.241:8080/FuelOnServer/rest/service
+        NSURLComponents *components = [[NSURLComponents alloc]init]; //
+        components.scheme = @"http";
+        components.host = @"128.199.129.241";
+        components.port = [NSNumber numberWithInteger:8080];
+        components.path = @"/FuelONServer/rest/service/getProductList";
         
-    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
-    // http://128.199.129.241:8080/FuelOnServer/rest/service
-    NSURLComponents *components = [[NSURLComponents alloc]init]; // 
-    components.scheme = @"http";
-    components.host = @"128.199.129.241";
-    components.port = [NSNumber numberWithInteger:8080];
-    components.path = @"/FuelONServer/rest/service/getProductList";
-    
-    NSURL *url = components.URL;
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:10.0];
-    
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setHTTPMethod:@"POST"];
-    
-    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURL *url = components.URL;
         
-        if (!error) {
-            NSError *localError = nil;
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                           timeoutInterval:10.0];
+        
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setHTTPMethod:@"POST"];
+        
+        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
-            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
-            
-            if (localError == nil) {
+            if (!error) {
+                NSError *localError = nil;
                 
-                NSLog(@"Response = %@",responseDict);
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
                 
-                if ([[responseDict objectForKey:@"errorMessage"] isEqualToString:@"Success"]) {
+                if (localError == nil) {
                     
-                    products = [responseDict objectForKey:@"responseObject"];
+                    NSLog(@"Response = %@",responseDict);
                     
+                    if ([[responseDict objectForKey:@"errorCode"] integerValue] == 0) {
+                        
+                        products = [responseDict objectForKey:@"responseObject"];
+                        
+                    }
                 }
             }
-        }
-    }];
-    
-    [postDataTask resume];
+        }];
+        
+        [postDataTask resume];
+    }
+    else {
+        [self showAlert:@"No internet available!"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,63 +119,71 @@
 //        favoriteProduct
 //        password
         
-        [self showProgressHudWithMessage:@"Registering user"];
-        
-        NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
-        
-        NSURLComponents *components = [[NSURLComponents alloc]init];
-        components.scheme = @"http";
-        components.host = @"128.199.129.241";
-        components.port = [NSNumber numberWithInteger:8080];
-        components.path = @"/FuelONServer/rest/service/registerUser";
-        
-        NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"name" value:[NSString stringWithFormat:@"%@ %@",_txtFieldFirstName.text,_txtFieldLastName.text]];
-        NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"mobile" value:_txtFieldMobile.text];
-        NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"email" value:_txtFieldEmail.text];
-        NSURLQueryItem *item4 = [NSURLQueryItem queryItemWithName:@"favoriteProduct" value:[[products objectAtIndex:selectedIndex] valueForKey:@"productId"]];
-        NSURLQueryItem *item5 = [NSURLQueryItem queryItemWithName:@"password" value:_txtFieldPassword.text];
-
-        
-        components.queryItems = @[item1,item2,item3,item4,item5];
-        
-        NSURL *url = components.URL;
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                           timeoutInterval:10.0];
-        
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [request setHTTPMethod:@"POST"];
-        
-        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([UIViewController isNetworkAvailable])
+        {
+            [self showProgressHudWithMessage:@"Registering user"];
             
-            [self removeHudAfterDelay:0.1];
+            NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
             
-            if (!error) {
-                NSError *localError = nil;
+            NSURLComponents *components = [[NSURLComponents alloc]init];
+            components.scheme = @"http";
+            components.host = @"128.199.129.241";
+            components.port = [NSNumber numberWithInteger:8080];
+            components.path = @"/FuelONServer/rest/service/registerUser";
+            
+            NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"name" value:[NSString stringWithFormat:@"%@ %@",_txtFieldFirstName.text,_txtFieldLastName.text]];
+            NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"mobile" value:_txtFieldMobile.text];
+            NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"email" value:_txtFieldEmail.text];
+            NSURLQueryItem *item4 = [NSURLQueryItem queryItemWithName:@"favoriteProduct" value:[[products objectAtIndex:selectedIndex] valueForKey:@"productId"]];
+            NSURLQueryItem *item5 = [NSURLQueryItem queryItemWithName:@"password" value:_txtFieldPassword.text];
+            
+            
+            components.queryItems = @[item1,item2,item3,item4,item5];
+            
+            NSURL *url = components.URL;
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                               timeoutInterval:10.0];
+            
+            [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+            [request setHTTPMethod:@"POST"];
+            
+            NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
-                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
+                [self removeHudAfterDelay:0.1];
                 
-                if (localError == nil) {
+                if (!error) {
+                    NSError *localError = nil;
                     
-                    NSLog(@"Response = %@",responseDict);
+                    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&localError];
                     
-                    if ([[responseDict objectForKey:@"errorMessage"] isEqualToString:@"Success"]) {
+                    if (localError == nil) {
                         
-                        dispatch_async(dispatch_get_main_queue(), ^{
+                        NSLog(@"Response = %@",responseDict);
+                        
+                        if ([[responseDict objectForKey:@"errorCode"] integerValue] == 0) {
                             
-                            [self showAlert:@"Registration successful!"];
-                            [self.navigationController popViewControllerAnimated:YES];
-                        });
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                
+                                [self showAlert:@"Registration successful!"];
+                                [self.navigationController popViewControllerAnimated:YES];
+                            });
+                        }
+                        else {
+                            [self showAlert:[responseDict objectForKey:@"errorMessage"]];
+                        }
                     }
                 }
-            }
-        }];
-        
-        [postDataTask resume];
+            }];
+            
+            [postDataTask resume];
+        }
+        else {
+            [self showAlert:@"No internet available!"];
+        }
     }
 }
 
@@ -181,6 +194,13 @@
 
 - (IBAction)showFavProductPicker:(id)sender {
     
+    [_txtFieldFirstName resignFirstResponder];
+    [_txtFieldLastName resignFirstResponder];
+    [_txtFieldMobile resignFirstResponder];
+    [_txtFieldEmail resignFirstResponder];
+    [_txtFieldFavProduct resignFirstResponder];
+    [_txtFieldPassword resignFirstResponder];
+
     NSMutableArray *productTitles = [NSMutableArray new];
     
     for (int i =0; i < products.count; i++) {

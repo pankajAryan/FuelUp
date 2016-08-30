@@ -18,6 +18,8 @@
 
 - (void)removeHudAfterDelay:(NSTimeInterval)delay;
 
++(BOOL)isNetworkAvailable;
+
 // UIAlertView Display Methods
 -(void) showAlert:(NSString *)message;
 -(void) showCancelAlert:(NSString *)message;
@@ -25,10 +27,13 @@
 
 - (void)showDelegatedAlertwithTitle:(NSString*)Title message:(NSString*)message tag:(NSInteger)tag;
 
--(void) showValidationError:(FFValidationResult*)validationError;
+//-(void) showValidationError:(FFValidationResult*)validationError;
 
 +(void)saveDatatoUserDefault:(id)data forKey:(NSString*)key;
 +(id)retrieveDataFromUserDefault:(NSString*)key;
 
+#pragma mark- Project specific
+
+- (UIImage*)getImageForBrand:(NSString*)brand;
 
 @end

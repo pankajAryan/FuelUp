@@ -45,17 +45,82 @@
     
     _productTabItems = [products copy];
     
+  //  for (NSDictionary *fuel in _productTabItems)
+        
+    for (int i = 0; i < _productTabItems.count; i++) {
+        
+        NSDictionary *fuel = [_productTabItems objectAtIndex:i];
+        
+        switch (i)
+        {
+            case 0:
+                _item1Label.text = [fuel objectForKey:@"productName"];
+                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:YES]];
+                
+                break;
+                
+            case 1:
+                _item2Label.text = [fuel objectForKey:@"productName"];
+                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+
+                break;
+                
+            case 2:
+                _item3Label.text = [fuel objectForKey:@"productName"];
+                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+
+                break;
+                
+            case 3:
+                _item4Label.text = [fuel objectForKey:@"productName"];
+                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (NSString*)getImageForTabItem:(NSString*)fuelName isSelected:(BOOL)selected {
+    
+    if ([fuelName compare:@"Regular 91" options:NSCaseInsensitiveSearch] == NSOrderedSame)
+    {
+        if (selected)
+            return @"footer_icon1_on";
+        else
+            return @"footer_icon1";
+    }
+    else if ([fuelName compare:@"Regular 95" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        if (selected)
+            return @"footer_icon2_on";
+        else
+            return @"footer_icon2";
+    }
+    if ([fuelName compare:@"Regular 98" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        if (selected)
+            return @"footer_icon3_on";
+        else
+            return @"footer_icon3";
+    }
+    else {// ([fuelName compare:@"Diesel" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+        if (selected)
+            return @"footer_icon4_on";
+        else
+            return @"footer_icon4";
+    }
 }
 
 - (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton {
-        
+    
     switch (selectedButton.tag) {
             
         case 0:
-            _item1.image = [UIImage imageNamed:@"footer_icon1_on"];
-            _item2.image = [UIImage imageNamed:@"footer_icon2"];
-            _item3.image = [UIImage imageNamed:@"footer_icon3"];
-            _item4.image = [UIImage imageNamed:@"footer_icon4"];
+            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:YES]];
+            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
+            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
+            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
             
             _containerViewItem1.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
             _containerViewItem2.backgroundColor = [UIColor clearColor];
@@ -70,10 +135,10 @@
             break;
             
         case 1:
-            _item1.image = [UIImage imageNamed:@"footer_icon1"];
-            _item2.image = [UIImage imageNamed:@"footer_icon2_on"];
-            _item3.image = [UIImage imageNamed:@"footer_icon3"];
-            _item4.image = [UIImage imageNamed:@"footer_icon4"];
+            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:YES]];
+            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
+            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
             
             _containerViewItem1.backgroundColor = [UIColor clearColor];
             _containerViewItem2.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
@@ -88,10 +153,10 @@
             break;
             
         case 2:
-            _item1.image = [UIImage imageNamed:@"footer_icon1"];
-            _item2.image = [UIImage imageNamed:@"footer_icon2"];
-            _item3.image = [UIImage imageNamed:@"footer_icon3_on"];
-            _item4.image = [UIImage imageNamed:@"footer_icon4"];
+            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
+            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:YES]];
+            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:NO]];
             
             _containerViewItem1.backgroundColor = [UIColor clearColor];
             _containerViewItem2.backgroundColor = [UIColor clearColor];
@@ -106,10 +171,10 @@
             break;
             
         case 3:
-            _item1.image = [UIImage imageNamed:@"footer_icon1"];
-            _item2.image = [UIImage imageNamed:@"footer_icon2"];
-            _item3.image = [UIImage imageNamed:@"footer_icon3"];
-            _item4.image = [UIImage imageNamed:@"footer_icon4_on"];
+            _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+            _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item2Label.text isSelected:NO]];
+            _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item3Label.text isSelected:NO]];
+            _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item4Label.text isSelected:YES]];
             
             _containerViewItem1.backgroundColor = [UIColor clearColor];
             _containerViewItem2.backgroundColor = [UIColor clearColor];

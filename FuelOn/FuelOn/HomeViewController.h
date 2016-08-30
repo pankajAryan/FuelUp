@@ -15,6 +15,7 @@
 }
 
 //@property (strong, nonatomic) IBOutlet UIView *menuContainerView;
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintMenuView_leading;
 

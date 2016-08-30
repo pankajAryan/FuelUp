@@ -30,6 +30,7 @@
 		CE0B92CB1D69E88E00149FA4 /* UITextField+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B92C81D69E88E00149FA4 /* UITextField+Validation.m */; };
 		CE0B92CC1D69E88E00149FA4 /* FFValidationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B92CA1D69E88E00149FA4 /* FFValidationResult.m */; };
 		CE0B92D01D69F1C200149FA4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0B92CF1D69F1C200149FA4 /* MBProgressHUD.m */; };
+		CE1090321D761B7D00755C6F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1090311D761B7D00755C6F /* Reachability.m */; };
 		CE10B75C1D6A22B600080B3F /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10B7571D6A22B600080B3F /* AbstractActionSheetPicker.m */; };
 		CE10B75D1D6A22B600080B3F /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10B7591D6A22B600080B3F /* ActionSheetStringPicker.m */; };
 		CE10B75E1D6A22B600080B3F /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10B75B1D6A22B600080B3F /* SWActionSheet.m */; };
@@ -44,6 +45,8 @@
 		CE15C0CC1D74DAC0004B56E4 /* HomeMapStoreModelProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0C61D74DAC0004B56E4 /* HomeMapStoreModelProduct.m */; };
 		CE15C0CD1D74DAC0004B56E4 /* HomeMapStoreModelProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0C81D74DAC0004B56E4 /* HomeMapStoreModelProductList.m */; };
 		CE15C0CE1D74DAC0004B56E4 /* HomeMapStoreModelResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0CA1D74DAC0004B56E4 /* HomeMapStoreModelResponseObject.m */; };
+		CE15C0D21D74E536004B56E4 /* PinAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE15C0CF1D74E536004B56E4 /* PinAnnotationView.xib */; };
+		CE15C0D31D74E536004B56E4 /* PinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0D11D74E536004B56E4 /* PinAnnotationView.m */; };
 		CE1D694E1D730710005BEA15 /* CLLocationManager+blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D694D1D730710005BEA15 /* CLLocationManager+blocks.m */; };
 		CEAFE6B01D68A13400F36B08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFE6AF1D68A13400F36B08 /* main.m */; };
 		CEAFE6B31D68A13400F36B08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFE6B21D68A13400F36B08 /* AppDelegate.m */; };
@@ -91,10 +94,12 @@
 		CE0B92C51D69E85500149FA4 /* UIViewController+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Utility.m"; sourceTree = "<group>"; };
 		CE0B92C71D69E88E00149FA4 /* UITextField+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Validation.h"; sourceTree = "<group>"; };
 		CE0B92C81D69E88E00149FA4 /* UITextField+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Validation.m"; sourceTree = "<group>"; };
-		CE0B92C91D69E88E00149FA4 /* FFValidationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFValidationResult.h; sourceTree = "<group>"; };
-		CE0B92CA1D69E88E00149FA4 /* FFValidationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFValidationResult.m; sourceTree = "<group>"; };
+		CE0B92C91D69E88E00149FA4 /* FFValidationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFValidationResult.h; path = ../../FFValidationResult.h; sourceTree = "<group>"; };
+		CE0B92CA1D69E88E00149FA4 /* FFValidationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFValidationResult.m; path = ../../FFValidationResult.m; sourceTree = "<group>"; };
 		CE0B92CE1D69F1C200149FA4 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CE0B92CF1D69F1C200149FA4 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		CE1090301D761B7D00755C6F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CE1090311D761B7D00755C6F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CE10B7561D6A22B600080B3F /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		CE10B7571D6A22B600080B3F /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
 		CE10B7581D6A22B600080B3F /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
@@ -124,6 +129,9 @@
 		CE15C0C81D74DAC0004B56E4 /* HomeMapStoreModelProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMapStoreModelProductList.m; sourceTree = "<group>"; };
 		CE15C0C91D74DAC0004B56E4 /* HomeMapStoreModelResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMapStoreModelResponseObject.h; sourceTree = "<group>"; };
 		CE15C0CA1D74DAC0004B56E4 /* HomeMapStoreModelResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMapStoreModelResponseObject.m; sourceTree = "<group>"; };
+		CE15C0CF1D74E536004B56E4 /* PinAnnotationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PinAnnotationView.xib; sourceTree = "<group>"; };
+		CE15C0D01D74E536004B56E4 /* PinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinAnnotationView.h; sourceTree = "<group>"; };
+		CE15C0D11D74E536004B56E4 /* PinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinAnnotationView.m; sourceTree = "<group>"; };
 		CE1D694C1D730710005BEA15 /* CLLocationManager+blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+blocks.h"; sourceTree = "<group>"; };
 		CE1D694D1D730710005BEA15 /* CLLocationManager+blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+blocks.m"; sourceTree = "<group>"; };
 		CEAFE6AB1D68A13400F36B08 /* FuelOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuelOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +139,7 @@
 		CEAFE6B11D68A13400F36B08 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEAFE6B21D68A13400F36B08 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CEAFE6B41D68A13400F36B08 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		CEAFE6B51D68A13400F36B08 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		CEAFE6B51D68A13400F36B08 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegisterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CEAFE6B81D68A13400F36B08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEAFE6BA1D68A13400F36B08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEAFE6BD1D68A13400F36B08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -141,7 +149,7 @@
 		CEAFE6C91D68A34400F36B08 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		CEAFE6CC1D68A37200F36B08 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		CEAFE6CE1D68BDB700F36B08 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		CEAFE6CF1D68BDB700F36B08 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CEAFE6CF1D68BDB700F36B08 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LoginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CEB886691D71EBB9008A3E44 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		CEB8866E1D71EF01008A3E44 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CEB8866F1D71EF01008A3E44 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -198,6 +206,28 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		CE10902F1D761B7D00755C6F /* Reachability_ARC */ = {
+			isa = PBXGroup;
+			children = (
+				CE1090301D761B7D00755C6F /* Reachability.h */,
+				CE1090311D761B7D00755C6F /* Reachability.m */,
+			);
+			path = Reachability_ARC;
+			sourceTree = "<group>";
+		};
+		CE1090331D761B8300755C6F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CE10902F1D761B7D00755C6F /* Reachability_ARC */,
+				CE1D694F1D730B04005BEA15 /* Frameworks */,
+				CEB886871D71F2CA008A3E44 /* RESideMenu */,
+				CEAFE6C51D68A32700F36B08 /* KeyboardAvoiding scrollView */,
+				CE10B7551D6A22B600080B3F /* ActionSheetPicker */,
+				CE0B92CD1D69F1C200149FA4 /* MBProgressHUD */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		CE10B7551D6A22B600080B3F /* ActionSheetPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,8 +254,6 @@
 				CE15C0A71D747ADF004B56E4 /* StoreDetailProductList.m */,
 				CE15C0A81D747ADF004B56E4 /* StoreDetailResponseObject.h */,
 				CE15C0A91D747ADF004B56E4 /* StoreDetailResponseObject.m */,
-				CE15C0BE1D74BDDD004B56E4 /* StoreDetailCell.h */,
-				CE15C0BF1D74BDDD004B56E4 /* StoreDetailCell.m */,
 			);
 			path = StoreDetailModel;
 			sourceTree = "<group>";
@@ -253,6 +281,20 @@
 				CE15C0CA1D74DAC0004B56E4 /* HomeMapStoreModelResponseObject.m */,
 			);
 			path = HomeMapStoreModel;
+			sourceTree = "<group>";
+		};
+		CE15C0D41D74E53E004B56E4 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE15C0BE1D74BDDD004B56E4 /* StoreDetailCell.h */,
+				CE15C0BF1D74BDDD004B56E4 /* StoreDetailCell.m */,
+				CE0AD3831D72A9980018A006 /* TabBarView.h */,
+				CE0AD3841D72A9980018A006 /* TabBarView.m */,
+				CE15C0D01D74E536004B56E4 /* PinAnnotationView.h */,
+				CE15C0D11D74E536004B56E4 /* PinAnnotationView.m */,
+				CE15C0CF1D74E536004B56E4 /* PinAnnotationView.xib */,
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		CE1D694B1D730710005BEA15 /* CLLocationManager-blocks */ = {
@@ -287,11 +329,7 @@
 		CEAFE6A21D68A13400F36B08 = {
 			isa = PBXGroup;
 			children = (
-				CE1D694F1D730B04005BEA15 /* Frameworks */,
-				CEB886871D71F2CA008A3E44 /* RESideMenu */,
-				CEAFE6C51D68A32700F36B08 /* KeyboardAvoiding scrollView */,
-				CE10B7551D6A22B600080B3F /* ActionSheetPicker */,
-				CE0B92CD1D69F1C200149FA4 /* MBProgressHUD */,
+				CE1090331D761B8300755C6F /* Utilities */,
 				CEB8866C1D71EE4B008A3E44 /* iOS Categories */,
 				CEAFE6AD1D68A13400F36B08 /* FuelOn */,
 				CEAFE6AC1D68A13400F36B08 /* Products */,
@@ -315,10 +353,9 @@
 				CEAFE6B21D68A13400F36B08 /* AppDelegate.m */,
 				CEAFE6B71D68A13400F36B08 /* Main.storyboard */,
 				CEB8866B1D71EE31008A3E44 /* LoginRegister */,
+				CE15C0D41D74E53E004B56E4 /* CustomViews */,
 				CEB8866E1D71EF01008A3E44 /* HomeViewController.h */,
 				CEB8866F1D71EF01008A3E44 /* HomeViewController.m */,
-				CE0AD3831D72A9980018A006 /* TabBarView.h */,
-				CE0AD3841D72A9980018A006 /* TabBarView.m */,
 				CE15C09B1D7455CC004B56E4 /* StoreDetailViewController.h */,
 				CE15C09C1D7455CC004B56E4 /* StoreDetailViewController.m */,
 				CEB8866D1D71EEB4008A3E44 /* HomePageNavigation */,
@@ -375,8 +412,6 @@
 				CE0B92C51D69E85500149FA4 /* UIViewController+Utility.m */,
 				CE0B92C71D69E88E00149FA4 /* UITextField+Validation.h */,
 				CE0B92C81D69E88E00149FA4 /* UITextField+Validation.m */,
-				CE0B92C91D69E88E00149FA4 /* FFValidationResult.h */,
-				CE0B92CA1D69E88E00149FA4 /* FFValidationResult.m */,
 			);
 			name = "iOS Categories";
 			sourceTree = "<group>";
@@ -422,6 +457,8 @@
 				CEB886921D71F3CB008A3E44 /* FFConfiguration.h */,
 				CEB886931D71F3CB008A3E44 /* FFConstant.h */,
 				CEB886951D71F3CB008A3E44 /* FFurls.h */,
+				CE0B92C91D69E88E00149FA4 /* FFValidationResult.h */,
+				CE0B92CA1D69E88E00149FA4 /* FFValidationResult.m */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -457,7 +494,7 @@
 				TargetAttributes = {
 					CEAFE6AA1D68A13400F36B08 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CT4G76434G;
+						DevelopmentTeam = 8GNK7SUQQR;
 					};
 				};
 			};
@@ -487,6 +524,7 @@
 				CEB8869A1D71F6D0008A3E44 /* Navigation.storyboard in Resources */,
 				CEAFE6BE1D68A13400F36B08 /* LaunchScreen.storyboard in Resources */,
 				CEAFE6BB1D68A13400F36B08 /* Assets.xcassets in Resources */,
+				CE15C0D21D74E536004B56E4 /* PinAnnotationView.xib in Resources */,
 				CEAFE6B91D68A13400F36B08 /* Main.storyboard in Resources */,
 				CEB886851D71EF01008A3E44 /* LeftMenu.storyboard in Resources */,
 				CEB8866A1D71EBB9008A3E44 /* Home.storyboard in Resources */,
@@ -525,6 +563,7 @@
 				CE10B75E1D6A22B600080B3F /* SWActionSheet.m in Sources */,
 				CE15C09D1D7455CC004B56E4 /* StoreDetailViewController.m in Sources */,
 				CEAFE6B31D68A13400F36B08 /* AppDelegate.m in Sources */,
+				CE1090321D761B7D00755C6F /* Reachability.m in Sources */,
 				CE15C0AA1D747ADF004B56E4 /* StoreDetailBaseClass.m in Sources */,
 				CE0B92CC1D69E88E00149FA4 /* FFValidationResult.m in Sources */,
 				CEB886901D71F2CA008A3E44 /* UIViewController+RESideMenu.m in Sources */,
@@ -534,6 +573,7 @@
 				CE15C0AE1D747ADF004B56E4 /* StoreDetailResponseObject.m in Sources */,
 				CEAFE6CB1D68A34400F36B08 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				CE15C0AD1D747ADF004B56E4 /* StoreDetailProductList.m in Sources */,
+				CE15C0D31D74E536004B56E4 /* PinAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,7 +694,7 @@
 					"$(PROJECT_DIR)/FuelOn",
 				);
 				INFOPLIST_FILE = FuelOn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobiquel.FuelOnTest;
@@ -675,7 +715,7 @@
 					"$(PROJECT_DIR)/FuelOn",
 				);
 				INFOPLIST_FILE = FuelOn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobiquel.FuelOnTest;
