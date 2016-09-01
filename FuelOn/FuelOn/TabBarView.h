@@ -11,6 +11,7 @@
 @interface TabBarView : UIView
 
 @property (nonatomic, strong) NSMutableArray *productTabItems;
+@property (nonatomic, assign) NSInteger selectedTabIndex;
 
 @property (copy) void (^tabBarItemSelectionCallback)(NSInteger selectedItemIndex);
 

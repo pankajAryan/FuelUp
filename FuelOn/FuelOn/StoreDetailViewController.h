@@ -31,6 +31,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *label_premiumValue;
 @property (weak, nonatomic) IBOutlet UILabel *label_dieselValue;
 
+@property (weak, nonatomic) IBOutlet UILabel *label_regularTimestamp;
+@property (weak, nonatomic) IBOutlet UILabel *label_mediumTimestamp;
+@property (weak, nonatomic) IBOutlet UILabel *label_premiumTimestamp;
+@property (weak, nonatomic) IBOutlet UILabel *label_dieselTimestamp;
+
 @property (weak, nonatomic) IBOutlet UILabel *labelNoOffers;
 
 - (IBAction)action_back:(id)sender;

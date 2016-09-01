@@ -19,13 +19,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutConstraintMenuView_leading;
 
-//@property (weak, nonatomic) IBOutlet UIView *tabBarContainer;
-
 
 - (IBAction)menuButtonAction:(id)sender;
 
-//- (IBAction)tabBarItemDidSelect:(UIButton*)selectedButton;
+- (IBAction)searchButtonAction:(id)sender;
 
-//-(void)pushToParticulerClass:(NSString *)classtype withurl:(NSString *)url header:(NSString *)header;
+- (IBAction)gpsButtonDidTap:(id)sender;
+
+- (IBAction)cheapestFuelButtonDidTap:(id)sender;
 
 @end

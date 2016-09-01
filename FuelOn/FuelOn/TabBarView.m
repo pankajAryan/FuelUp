@@ -45,8 +45,7 @@
 - (void)setTabItemsLayoutWithProducts:(NSArray*)products {
     
     _productTabItems = [products copy];
-    
-  //  for (NSDictionary *fuel in _productTabItems)
+    _selectedTabIndex = 1;
         
     for (int i = 0; i < _productTabItems.count; i++) {
         
@@ -195,7 +194,8 @@
                 break;
         }
         
-        self.tabBarItemSelectionCallback(selectedButton.tag);
+        _selectedTabIndex = selectedButton.tag;
+        self.tabBarItemSelectionCallback(_selectedTabIndex);
     }
     else {
         [UIViewController showAlert:@"No internet available!"];

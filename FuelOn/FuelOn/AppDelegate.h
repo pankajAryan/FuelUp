@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) UINavigationController *rootNavController;
 
+- (void)logout;
 
 
 @end

@@ -48,6 +48,7 @@
 		CE15C0D21D74E536004B56E4 /* PinAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE15C0CF1D74E536004B56E4 /* PinAnnotationView.xib */; };
 		CE15C0D31D74E536004B56E4 /* PinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE15C0D11D74E536004B56E4 /* PinAnnotationView.m */; };
 		CE1D694E1D730710005BEA15 /* CLLocationManager+blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D694D1D730710005BEA15 /* CLLocationManager+blocks.m */; };
+		CEAE7B1C1D7759B100CF956A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAE7B1B1D7759B100CF956A /* SearchViewController.m */; };
 		CEAFE6B01D68A13400F36B08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFE6AF1D68A13400F36B08 /* main.m */; };
 		CEAFE6B31D68A13400F36B08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFE6B21D68A13400F36B08 /* AppDelegate.m */; };
 		CEAFE6B61D68A13400F36B08 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFE6B51D68A13400F36B08 /* RegisterViewController.m */; };
@@ -134,6 +135,8 @@
 		CE15C0D11D74E536004B56E4 /* PinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinAnnotationView.m; sourceTree = "<group>"; };
 		CE1D694C1D730710005BEA15 /* CLLocationManager+blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+blocks.h"; sourceTree = "<group>"; };
 		CE1D694D1D730710005BEA15 /* CLLocationManager+blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+blocks.m"; sourceTree = "<group>"; };
+		CEAE7B1A1D7759B100CF956A /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		CEAE7B1B1D7759B100CF956A /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CEAFE6AB1D68A13400F36B08 /* FuelOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FuelOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAFE6AF1D68A13400F36B08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEAFE6B11D68A13400F36B08 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -358,6 +361,8 @@
 				CEB8866F1D71EF01008A3E44 /* HomeViewController.m */,
 				CE15C09B1D7455CC004B56E4 /* StoreDetailViewController.h */,
 				CE15C09C1D7455CC004B56E4 /* StoreDetailViewController.m */,
+				CEAE7B1A1D7759B100CF956A /* SearchViewController.h */,
+				CEAE7B1B1D7759B100CF956A /* SearchViewController.m */,
 				CEB8866D1D71EEB4008A3E44 /* HomePageNavigation */,
 				CEAFE6BA1D68A13400F36B08 /* Assets.xcassets */,
 				CEAFE6BC1D68A13400F36B08 /* LaunchScreen.storyboard */,
@@ -561,6 +566,7 @@
 				CEB8868F1D71F2CA008A3E44 /* RESideMenu.m in Sources */,
 				CEAFE6D01D68BDB700F36B08 /* LoginViewController.m in Sources */,
 				CE10B75E1D6A22B600080B3F /* SWActionSheet.m in Sources */,
+				CEAE7B1C1D7759B100CF956A /* SearchViewController.m in Sources */,
 				CE15C09D1D7455CC004B56E4 /* StoreDetailViewController.m in Sources */,
 				CEAFE6B31D68A13400F36B08 /* AppDelegate.m in Sources */,
 				CE1090321D761B7D00755C6F /* Reachability.m in Sources */,

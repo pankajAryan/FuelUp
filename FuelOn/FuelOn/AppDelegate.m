@@ -25,18 +25,28 @@
     
     NSString *userId = [UIViewController retrieveDataFromUserDefault:@"userId"];
     
-    if (userId) {
+    if (userId && userId.length) {
         
-        self.rootNavController = (UINavigationController*)self.window.rootViewController;
+        self.rootNavController = (UINavigationController*)self.window.rootViewController; // it'll return UINavigationController which is set as Initial view controller in storyboard.
         
         HomeViewController *rootVC = [HomeViewController instantiateViewControllerWithIdentifier:@"HomeViewController" fromStoryboard:@"Main"];
-        
         self.rootNavController.viewControllers = @[rootVC];
-        
-        //[self.window makeKeyAndVisible];
+        [self.window makeKeyAndVisible];
     }
     
     return YES;
+}
+
+- (void)logout {
+    
+    [UIViewController saveDatatoUserDefault:@"" forKey:@"userId"];
+    
+    UINavigationController *rootVC = [UINavigationController instantiateViewControllerWithIdentifier:@"rootNavController" fromStoryboard:@"Main"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.window.rootViewController = rootVC;
+        [self.window makeKeyAndVisible];
+    });
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

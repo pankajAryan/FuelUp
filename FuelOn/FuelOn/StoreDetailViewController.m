@@ -87,25 +87,29 @@
                                     case 0:
                                         _label_regularTitle.text = product.product.productName;
                                         _label_regularValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
+                                        _label_regularTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
                                         
                                         break;
                                         
                                     case 1:
                                         _label_mediumTitle.text = product.product.productName;
                                         _label_mediumValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        
+                                        _label_mediumTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
+
                                         break;
                                         
                                     case 2:
                                         _label_premiumTitle.text = product.product.productName;
                                         _label_premiumValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        
+                                        _label_premiumTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
+
                                         break;
                                         
                                     case 3:
                                         _label_dieselTitle.text = product.product.productName;
                                         _label_dieselValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        
+                                        _label_dieselTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
+
                                         break;
                                         
                                     default:
@@ -113,6 +117,8 @@
                                 }
                             }
                             
+                            _view_tableHeader.hidden = NO;
+
                             if (storeDetailBase.responseObject.offerList.count) {
                                 
                                 _table_storeDetail.hidden = NO;
@@ -158,6 +164,8 @@
 }
 
 - (IBAction)action_favourites:(id)sender {
+    
+    [self showAlert:@"Added to favourites"];
 }
 
 
@@ -229,7 +237,6 @@
 }
 
 - (void)drawFuelStationAtMap {
-    
     
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];

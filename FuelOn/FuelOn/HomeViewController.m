@@ -16,6 +16,9 @@
 #import "CLLocationManager+blocks.h"
 #import "StoreDetailViewController.h"
 #import "PinAnnotationView.h"
+#import "LoginViewController.h"
+#import "AppDelegate.h"
+#import "SearchViewController.h"
 
 @interface HomeViewController() {
     
@@ -47,6 +50,11 @@
 
     [self.view layoutIfNeeded];
     
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
+                                                            longitude:[lon floatValue]
+                                                                 zoom:14]; //  -36.908655 //  174.9392557
+    _mapView.camera = camera;
+    
     [self fetchProducts];
 }
 
@@ -57,14 +65,9 @@
 
 #pragma mark- TableView Datasource
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -121,6 +124,13 @@
         }
             break;
             
+        case 6:
+        {
+            menuTitle.text = @"Logout";
+            menuIcon.image = [UIImage imageNamed:@"logout"];
+        }
+            break;
+            
         default:
         {
             
@@ -133,13 +143,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self.view layoutIfNeeded];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        // Hide Manu
-        _layoutConstraintMenuView_leading.constant = -ScreenHeight;
+    if (indexPath.row == 6) { // Logout
+        [App_Delegate logout];
+    }
+    else {
         [self.view layoutIfNeeded];
-    }];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            // Hide Manu
+            _layoutConstraintMenuView_leading.constant = -ScreenHeight;
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
 #pragma mark - Action Methods
@@ -298,8 +313,8 @@
                     components.path = @"/FuelONServer/rest/service/getStoresForProductNearBy";
                     
                     NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"productId" value:productId];
-                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:lat]; // // @"28.7072344"  -36.908655
-                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:lon]; //  // @"77.2104811"
+                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:lat]; //  -36.908655 //  174.9392557
+                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:lon]; //
                     
                     components.queryItems = @[item1,item2,item3];
                     
@@ -325,6 +340,8 @@
                             if (localError == nil) {
                                 
                                 NSLog(@"Response = %@",responseDict);
+                                BOOL isMapSetupRequired =  (fuelStationBase == nil) ? YES : NO;
+
                                 fuelStationBase = [[HomeMapStoreModelBaseClass alloc] initWithDictionary:responseDict];
                                 
                                 if ([fuelStationBase.errorMessage isEqualToString:@"Success"]) {
@@ -333,7 +350,10 @@
                                         
                                         [_mapView clear];
                                         
-                                        [self loadMapView];
+                                        if (isMapSetupRequired)
+                                            [self loadMapView];
+                                        else
+                                            [self drawFuelStationsAtMap];
                                     });
                                 }
                             }
@@ -361,7 +381,7 @@
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
                                                                 longitude:[lon floatValue]
-                                                                     zoom:12]; //  -36.908655 //  174.9392557
+                                                                     zoom:14]; //  -36.908655 //  174.9392557
     
    // _mapView = [GMSMapView mapWithFrame:_mapView.bounds camera:camera];
     _mapView.camera = camera;
@@ -436,14 +456,33 @@
     }
 }
 
+- (IBAction)gpsButtonDidTap:(id)sender {
+    
+    // Set nil value to make following condition return NO
+    // BOOL isMapSetupRequired =  (fuelStationBase == nil) ? YES : NO;
+    fuelStationBase = nil;
+    
+    [self fetchFuelStationsForSelectedType:_tabBar.selectedTabIndex];
+}
+
+- (IBAction)cheapestFuelButtonDidTap:(id)sender {
+    [self showAlert:@"Feature coming soon!"];
+}
+
 - (IBAction)pushDetailVC {
     
     StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
     
-//    HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
+    //    HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
     controller.storeId = @"1";//fuelStationPin.responseObjectIdentifier;
     
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)searchButtonAction:(id)sender {
+    
+    SearchViewController *controller = [SearchViewController instantiateViewControllerWithIdentifier:@"SearchViewController" fromStoryboard:@"Main"];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 @end
