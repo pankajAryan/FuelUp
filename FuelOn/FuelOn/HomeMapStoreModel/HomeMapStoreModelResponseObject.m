@@ -17,7 +17,7 @@ NSString *const kHomeMapStoreModelResponseObjectBrand = @"brand";
 NSString *const kHomeMapStoreModelResponseObjectLat = @"lat";
 NSString *const kHomeMapStoreModelResponseObjectOfferList = @"offerList";
 NSString *const kHomeMapStoreModelResponseObjectName = @"name";
-
+NSString *const kHomeMapStoreModelResponseObjectPremium = @"isPremium";
 
 @interface HomeMapStoreModelResponseObject ()
 
@@ -49,27 +49,28 @@ NSString *const kHomeMapStoreModelResponseObjectName = @"name";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.address = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectAddress fromDictionary:dict];
-    NSObject *receivedHomeMapStoreModelProductList = [dict objectForKey:kHomeMapStoreModelResponseObjectProductList];
-    NSMutableArray *parsedHomeMapStoreModelProductList = [NSMutableArray array];
-    if ([receivedHomeMapStoreModelProductList isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in (NSArray *)receivedHomeMapStoreModelProductList) {
-            if ([item isKindOfClass:[NSDictionary class]]) {
-                [parsedHomeMapStoreModelProductList addObject:[HomeMapStoreModelProductList modelObjectWithDictionary:item]];
+        self.address = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectAddress fromDictionary:dict];
+        self.isPremium = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectPremium fromDictionary:dict];
+        NSObject *receivedHomeMapStoreModelProductList = [dict objectForKey:kHomeMapStoreModelResponseObjectProductList];
+        NSMutableArray *parsedHomeMapStoreModelProductList = [NSMutableArray array];
+        if ([receivedHomeMapStoreModelProductList isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *item in (NSArray *)receivedHomeMapStoreModelProductList) {
+                if ([item isKindOfClass:[NSDictionary class]]) {
+                    [parsedHomeMapStoreModelProductList addObject:[HomeMapStoreModelProductList modelObjectWithDictionary:item]];
+                }
             }
-       }
-    } else if ([receivedHomeMapStoreModelProductList isKindOfClass:[NSDictionary class]]) {
-       [parsedHomeMapStoreModelProductList addObject:[HomeMapStoreModelProductList modelObjectWithDictionary:(NSDictionary *)receivedHomeMapStoreModelProductList]];
-    }
-
-    self.productList = [NSArray arrayWithArray:parsedHomeMapStoreModelProductList];
-            self.responseObjectIdentifier = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectId fromDictionary:dict];
-            self.lon = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectLon fromDictionary:dict];
-            self.brand = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectBrand fromDictionary:dict];
-            self.lat = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectLat fromDictionary:dict];
-            self.offerList = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectOfferList fromDictionary:dict];
-            self.name = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectName fromDictionary:dict];
-
+        } else if ([receivedHomeMapStoreModelProductList isKindOfClass:[NSDictionary class]]) {
+            [parsedHomeMapStoreModelProductList addObject:[HomeMapStoreModelProductList modelObjectWithDictionary:(NSDictionary *)receivedHomeMapStoreModelProductList]];
+        }
+        
+        self.productList = [NSArray arrayWithArray:parsedHomeMapStoreModelProductList];
+        self.responseObjectIdentifier = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectId fromDictionary:dict];
+        self.lon = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectLon fromDictionary:dict];
+        self.brand = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectBrand fromDictionary:dict];
+        self.lat = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectLat fromDictionary:dict];
+        self.offerList = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectOfferList fromDictionary:dict];
+        self.name = [self objectOrNilForKey:kHomeMapStoreModelResponseObjectName fromDictionary:dict];
+        
     }
     
     return self;
@@ -80,6 +81,7 @@ NSString *const kHomeMapStoreModelResponseObjectName = @"name";
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:self.address forKey:kHomeMapStoreModelResponseObjectAddress];
+    [mutableDict setValue:self.isPremium forKey:kHomeMapStoreModelResponseObjectPremium];
     NSMutableArray *tempArrayForProductList = [NSMutableArray array];
     for (NSObject *subArrayObject in self.productList) {
         if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
@@ -97,11 +99,11 @@ NSString *const kHomeMapStoreModelResponseObjectName = @"name";
     [mutableDict setValue:self.lat forKey:kHomeMapStoreModelResponseObjectLat];
     [mutableDict setValue:self.offerList forKey:kHomeMapStoreModelResponseObjectOfferList];
     [mutableDict setValue:self.name forKey:kHomeMapStoreModelResponseObjectName];
-
+    
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
 
-- (NSString *)description 
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
 }
@@ -119,8 +121,9 @@ NSString *const kHomeMapStoreModelResponseObjectName = @"name";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-
+    
     self.address = [aDecoder decodeObjectForKey:kHomeMapStoreModelResponseObjectAddress];
+    self.isPremium = [aDecoder decodeObjectForKey:kHomeMapStoreModelResponseObjectPremium];
     self.productList = [aDecoder decodeObjectForKey:kHomeMapStoreModelResponseObjectProductList];
     self.responseObjectIdentifier = [aDecoder decodeObjectForKey:kHomeMapStoreModelResponseObjectId];
     self.lon = [aDecoder decodeObjectForKey:kHomeMapStoreModelResponseObjectLon];
@@ -133,7 +136,7 @@ NSString *const kHomeMapStoreModelResponseObjectName = @"name";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-
+    [aCoder encodeObject:_isPremium forKey:kHomeMapStoreModelResponseObjectPremium];
     [aCoder encodeObject:_address forKey:kHomeMapStoreModelResponseObjectAddress];
     [aCoder encodeObject:_productList forKey:kHomeMapStoreModelResponseObjectProductList];
     [aCoder encodeObject:_responseObjectIdentifier forKey:kHomeMapStoreModelResponseObjectId];
@@ -149,7 +152,7 @@ NSString *const kHomeMapStoreModelResponseObjectName = @"name";
     HomeMapStoreModelResponseObject *copy = [[HomeMapStoreModelResponseObject alloc] init];
     
     if (copy) {
-
+        copy.isPremium = [self.isPremium copyWithZone:zone];
         copy.address = [self.address copyWithZone:zone];
         copy.productList = [self.productList copyWithZone:zone];
         copy.responseObjectIdentifier = [self.responseObjectIdentifier copyWithZone:zone];

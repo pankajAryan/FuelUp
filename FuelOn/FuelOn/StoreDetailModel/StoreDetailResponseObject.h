@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *phoneNumber;
 @property (nonatomic, strong) NSString *brand;
+@property (nonatomic, strong) NSString *isPremium;
+@property (nonatomic, strong) NSString *lastUpdated;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

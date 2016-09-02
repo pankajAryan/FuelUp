@@ -16,8 +16,9 @@
 @property (nonatomic, strong) NSString *responseObjectIdentifier;
 @property (nonatomic, strong) NSString *lon;
 @property (nonatomic, strong) NSString *brand;
+@property (nonatomic, strong) NSString *isPremium;
 @property (nonatomic, strong) NSString *lat;
-@property (nonatomic, assign) id offerList;
+@property (nonatomic, strong) id offerList;
 @property (nonatomic, strong) NSString *name;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;

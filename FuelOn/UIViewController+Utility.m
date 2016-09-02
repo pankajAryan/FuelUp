@@ -33,7 +33,7 @@
 }
 
 
-- (void)removeHudAfterDelay:(NSTimeInterval)delay {
+- (void)removeProgressHudAfterDelay:(NSTimeInterval)delay {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -232,22 +232,50 @@
 
 #pragma mark- Project specific
 
-- (UIImage*)getImageForBrand:(NSString*)brand {
+- (UIImage*)getImageForBrand:(NSString*)brand premiumflag:(NSString*)premium {
+    
+    BOOL isPremium = [premium isEqualToString:@"Y"] ? YES:NO;
+    
+    if (!isPremium) {
+        if ([brand compare:@"Gull" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            return [UIImage imageNamed:@"gull_pin"];
+        }
+        else if ([brand compare:@"Z" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            return [UIImage imageNamed:@"z_pin"];
+        }
+        if ([brand compare:@"Mobil" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            return [UIImage imageNamed:@"mobil_pin"];
+        }
+        if ([brand compare:@"BP" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            return [UIImage imageNamed:@"bp_pin"];
+        }
+        if ([brand compare:@"Caltex" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            return [UIImage imageNamed:@"caltex_pin"];
+        }
+        else
+            return [UIImage imageNamed:@"map_pin"];
+    }
+    else {
+        return [self getImageForPremiumBrand:brand];
+    }
+}
+
+- (UIImage*)getImageForPremiumBrand:(NSString*)brand {
     
     if ([brand compare:@"Gull" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        return [UIImage imageNamed:@"gull_pin"];
+        return [UIImage imageNamed:@"gull_pin-1"];
     }
     else if ([brand compare:@"Z" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        return [UIImage imageNamed:@"z_pin"];
+        return [UIImage imageNamed:@"z_pin-1"];
     }
     if ([brand compare:@"Mobil" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        return [UIImage imageNamed:@"mobil_pin"];
+        return [UIImage imageNamed:@"mobil_pin-1"];
     }
     if ([brand compare:@"BP" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        return [UIImage imageNamed:@"bp_pin"];
+        return [UIImage imageNamed:@"bp_pin-1"];
     }
     if ([brand compare:@"Caltex" options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        return [UIImage imageNamed:@"caltex_pin"];
+        return [UIImage imageNamed:@"caltex_pin-1"];
     }
     else
         return [UIImage imageNamed:@"map_pin"];

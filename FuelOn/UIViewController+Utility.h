@@ -16,7 +16,7 @@
 
 - (void)showProgressHudWithMessage:(NSString*)message;
 
-- (void)removeHudAfterDelay:(NSTimeInterval)delay;
+- (void)removeProgressHudAfterDelay:(NSTimeInterval)delay;
 
 +(BOOL)isNetworkAvailable;
 
@@ -35,6 +35,6 @@
 
 #pragma mark- Project specific
 
-- (UIImage*)getImageForBrand:(NSString*)brand;
+- (UIImage*)getImageForBrand:(NSString*)brand premiumflag:(NSString*)premium;
 
 @end

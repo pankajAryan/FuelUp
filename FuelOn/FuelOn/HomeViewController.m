@@ -47,15 +47,57 @@
     [super viewDidLoad];
     
     _layoutConstraintMenuView_leading.constant = -ScreenHeight;
-
     [self.view layoutIfNeeded];
     
+    self.manager = [CLLocationManager updateManagerWithAccuracy:100.0 locationAge:15.0 authorizationDesciption:CLLocationUpdateAuthorizationDescriptionWhenInUse];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    BOOL isSetupRequired =  (lat == nil || fuelStationBase == nil) ? YES : NO;
+
+    if (isSetupRequired) {
+        
+        if ([CLLocationManager isLocationUpdatesAvailable]) {
+            
+            [self.manager startUpdatingLocationWithUpdateBlock:^(CLLocationManager *manager, CLLocation *location, NSError *error, BOOL *stopUpdating) {
+                
+                *stopUpdating = YES;
+                
+                if (location)
+                {
+                    lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
+                    lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
+                    
+                    [self setupMapView];
+                    [self fetchProducts];
+                }
+                else
+                    [self showAlert:@"Could not determine your location. Please check location settings."];
+            }];
+        }
+        else {
+            [self showAlert:@"Please enable location services from settings."];
+        }
+    }
+}
+
+- (void)setupMapView {
+    // Map Setup
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
                                                             longitude:[lon floatValue]
-                                                                 zoom:14]; //  -36.908655 //  174.9392557
-    _mapView.camera = camera;
+                                                                 zoom:14];
     
-    [self fetchProducts];
+    // _mapView = [GMSMapView mapWithFrame:_mapView.bounds camera:camera]; Use if mapView is not created in xib
+    _mapView.camera = camera;
+    _mapView.delegate = self;
+    _mapView.myLocationEnabled = YES;
+    _mapView.indoorEnabled = YES;
+    _mapView.accessibilityElementsHidden = NO;
+    _mapView.settings.scrollGestures = YES;
+    _mapView.settings.zoomGestures = YES;
+    _mapView.settings.compassButton = YES;
+    _mapView.settings.myLocationButton = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -187,6 +229,8 @@
     
     if ([UIViewController isNetworkAvailable])
     {
+        [self showProgressHudWithMessage:@""];
+
         NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
         // http://128.199.129.241:8080/FuelOnServer/rest/service
@@ -200,7 +244,7 @@
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                           timeoutInterval:10.0];
+                                                           timeoutInterval:30.0];
         
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -238,13 +282,13 @@
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [self fetchFuelStationsForSelectedType:0];
+                            [self fetchFuelStationsForSelectedType:0 showLoading:NO];
                             
                             [self.tabBar setTabItemsLayoutWithProducts:products];
                             
                             self.tabBar.tabBarItemSelectionCallback = ^(NSInteger selectedItemIndex){
                                 
-                                [self fetchFuelStationsForSelectedType:selectedItemIndex];
+                                [self fetchFuelStationsForSelectedType:selectedItemIndex showLoading:YES];
                             };
                             
                             [self.view addSubview:_tabBar];
@@ -281,9 +325,7 @@
     }
 }
 
-- (void)fetchFuelStationsForSelectedType:(NSInteger)index {
-    
-    self.manager = [CLLocationManager updateManagerWithAccuracy:100.0 locationAge:15.0 authorizationDesciption:CLLocationUpdateAuthorizationDescriptionWhenInUse];
+- (void)fetchFuelStationsForSelectedType:(NSInteger)index showLoading:(BOOL)isHudRequired {
     
     if ([CLLocationManager isLocationUpdatesAvailable]) {
         
@@ -293,15 +335,16 @@
             
             if (location)
             {
-                lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
-                lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
+                lat = [NSString stringWithFormat:@"%f",-36.908655];     // location.coordinate.latitude
+                lon = [NSString stringWithFormat:@"%f",174.9392557];    // location.coordinate.longitude
                 
                 NSDictionary *productDict = [products objectAtIndex:index];
                 NSString *productId = [productDict objectForKey:@"productId"];
             
                 if ([UIViewController isNetworkAvailable])
                 {
-                    [self showProgressHudWithMessage:@""];
+                    if (isHudRequired)
+                        [self showProgressHudWithMessage:@""];
 
                     NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
                     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
@@ -322,7 +365,7 @@
                     
                     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                                       timeoutInterval:10.0];
+                                                                       timeoutInterval:30.0];
                     
                     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
                     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -330,7 +373,7 @@
                     
                     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                         
-                        [self removeHudAfterDelay:0.1];
+                        [self removeProgressHudAfterDelay:0.1];
                         
                         if (!error) {
                             NSError *localError = nil;
@@ -340,7 +383,7 @@
                             if (localError == nil) {
                                 
                                 NSLog(@"Response = %@",responseDict);
-                                BOOL isMapSetupRequired =  (fuelStationBase == nil) ? YES : NO;
+                                BOOL isResetRequired =  (lat == nil || fuelStationBase == nil) ? YES : NO;
 
                                 fuelStationBase = [[HomeMapStoreModelBaseClass alloc] initWithDictionary:responseDict];
                                 
@@ -350,7 +393,7 @@
                                         
                                         [_mapView clear];
                                         
-                                        if (isMapSetupRequired)
+                                        if (isResetRequired)
                                             [self loadMapView];
                                         else
                                             [self drawFuelStationsAtMap];
@@ -383,16 +426,7 @@
                                                                 longitude:[lon floatValue]
                                                                      zoom:14]; //  -36.908655 //  174.9392557
     
-   // _mapView = [GMSMapView mapWithFrame:_mapView.bounds camera:camera];
     _mapView.camera = camera;
-    _mapView.delegate = self;
-    _mapView.myLocationEnabled = YES;
-    _mapView.indoorEnabled = YES;
-    _mapView.accessibilityElementsHidden = NO;
-    _mapView.settings.scrollGestures = YES;
-    _mapView.settings.zoomGestures = YES;
-    _mapView.settings.compassButton = YES;
-    _mapView.settings.myLocationButton = NO;
     
     //    [googleMaps setMinZoom:5 maxZoom:11];
 //    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(28.7072344, 77.2104811);
@@ -412,7 +446,7 @@
         marker.position = CLLocationCoordinate2DMake([fuelStationPin.lat doubleValue], [fuelStationPin.lon doubleValue]);
         
         PinAnnotationView *pin = [[PinAnnotationView alloc]initWithFrame:CGRectMake(0, 0, 62, 70)];
-        pin.imageView.image = [self getImageForBrand:fuelStationPin.brand];
+        pin.imageView.image = [self getImageForBrand:fuelStationPin.brand  premiumflag:fuelStationPin.isPremium];
 
         if (fuelStationPin.productList.count)
         {
@@ -458,31 +492,57 @@
 
 - (IBAction)gpsButtonDidTap:(id)sender {
     
-    // Set nil value to make following condition return NO
-    // BOOL isMapSetupRequired =  (fuelStationBase == nil) ? YES : NO;
-    fuelStationBase = nil;
+    // Reset location and pins data.
+    lat = nil; lon = nil; fuelStationBase = nil;
     
-    [self fetchFuelStationsForSelectedType:_tabBar.selectedTabIndex];
+    [self fetchFuelStationsForSelectedType:_tabBar.selectedTabIndex showLoading:YES];
 }
 
 - (IBAction)cheapestFuelButtonDidTap:(id)sender {
     [self showAlert:@"Feature coming soon!"];
 }
 
-- (IBAction)pushDetailVC {
-    
-    StoreDetailViewController *controller = [StoreDetailViewController instantiateViewControllerWithIdentifier:@"StoreDetailViewController" fromStoryboard:@"Main"];
-    
-    //    HomeMapStoreModelResponseObject *fuelStationPin = marker.userData;
-    controller.storeId = @"1";//fuelStationPin.responseObjectIdentifier;
-    
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
+#pragma mark- Search related methods
+/*
 - (IBAction)searchButtonAction:(id)sender {
-    
     SearchViewController *controller = [SearchViewController instantiateViewControllerWithIdentifier:@"SearchViewController" fromStoryboard:@"Main"];
     [self presentViewController:controller animated:YES completion:nil];
+ 
+    [_searchBar becomeFirstResponder];
 }
+*/
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_searchBar setShowsCancelButton:YES];
+        _searchBar.alpha = 1.0;
+    });
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _searchBar.showsCancelButton = NO;
+        _searchBar.alpha = 0.7;
+    });
+    return YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_searchBar resignFirstResponder];
+    });
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_searchBar resignFirstResponder];
+    });
+}
+
 
 @end

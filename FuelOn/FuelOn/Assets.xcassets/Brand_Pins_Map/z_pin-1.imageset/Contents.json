@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cheapet_price.png",
+      "filename" : "z_pin.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cheapet_price@2x.png",
+      "filename" : "z_pin@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cheapet_price@3x.png",
+      "filename" : "z_pin@3x.png",
       "scale" : "3x"
     }
   ],

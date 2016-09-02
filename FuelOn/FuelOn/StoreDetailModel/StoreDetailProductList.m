@@ -10,7 +10,7 @@
 
 
 NSString *const kStoreDetailProductListProduct = @"product";
-NSString *const kStoreDetailProductListLastUpdated = @"lastUpdated";
+//NSString *const kStoreDetailProductListLastUpdated = @"lastUpdated";
 NSString *const kStoreDetailProductListCost = @"cost";
 
 
@@ -23,7 +23,6 @@ NSString *const kStoreDetailProductListCost = @"cost";
 @implementation StoreDetailProductList
 
 @synthesize product = _product;
-@synthesize lastUpdated = _lastUpdated;
 @synthesize cost = _cost;
 
 
@@ -39,10 +38,10 @@ NSString *const kStoreDetailProductListCost = @"cost";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.product = [StoreDetailProduct modelObjectWithDictionary:[dict objectForKey:kStoreDetailProductListProduct]];
-            self.lastUpdated = [self objectOrNilForKey:kStoreDetailProductListLastUpdated fromDictionary:dict];
-            self.cost = [self objectOrNilForKey:kStoreDetailProductListCost fromDictionary:dict];
-
+        self.product = [StoreDetailProduct modelObjectWithDictionary:[dict objectForKey:kStoreDetailProductListProduct]];
+//        self.lastUpdated = [self objectOrNilForKey:kStoreDetailProductListLastUpdated fromDictionary:dict];
+        self.cost = [self objectOrNilForKey:kStoreDetailProductListCost fromDictionary:dict];
+        
     }
     
     return self;
@@ -53,13 +52,13 @@ NSString *const kStoreDetailProductListCost = @"cost";
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:[self.product dictionaryRepresentation] forKey:kStoreDetailProductListProduct];
-    [mutableDict setValue:self.lastUpdated forKey:kStoreDetailProductListLastUpdated];
+//    [mutableDict setValue:self.lastUpdated forKey:kStoreDetailProductListLastUpdated];
     [mutableDict setValue:self.cost forKey:kStoreDetailProductListCost];
-
+    
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
 
-- (NSString *)description 
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
 }
@@ -77,18 +76,18 @@ NSString *const kStoreDetailProductListCost = @"cost";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-
+    
     self.product = [aDecoder decodeObjectForKey:kStoreDetailProductListProduct];
-    self.lastUpdated = [aDecoder decodeObjectForKey:kStoreDetailProductListLastUpdated];
+//    self.lastUpdated = [aDecoder decodeObjectForKey:kStoreDetailProductListLastUpdated];
     self.cost = [aDecoder decodeObjectForKey:kStoreDetailProductListCost];
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-
+    
     [aCoder encodeObject:_product forKey:kStoreDetailProductListProduct];
-    [aCoder encodeObject:_lastUpdated forKey:kStoreDetailProductListLastUpdated];
+//    [aCoder encodeObject:_lastUpdated forKey:kStoreDetailProductListLastUpdated];
     [aCoder encodeObject:_cost forKey:kStoreDetailProductListCost];
 }
 
@@ -97,9 +96,9 @@ NSString *const kStoreDetailProductListCost = @"cost";
     StoreDetailProductList *copy = [[StoreDetailProductList alloc] init];
     
     if (copy) {
-
+        
         copy.product = [self.product copyWithZone:zone];
-        copy.lastUpdated = [self.lastUpdated copyWithZone:zone];
+//        copy.lastUpdated = [self.lastUpdated copyWithZone:zone];
         copy.cost = [self.cost copyWithZone:zone];
     }
     

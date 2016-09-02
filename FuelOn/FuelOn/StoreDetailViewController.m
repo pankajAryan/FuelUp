@@ -49,7 +49,7 @@
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                           timeoutInterval:10.0];
+                                                           timeoutInterval:30.0];
         
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -57,7 +57,7 @@
         
         NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
-            [self removeHudAfterDelay:0.1];
+            [self removeProgressHudAfterDelay:0.1];
             
             if (!error) {
                 NSError *localError = nil;
@@ -76,7 +76,7 @@
                             
                             _label_storeName.text = [NSString stringWithFormat:@"Store Name: %@",storeDetailBase.responseObject.name];
                             _label_headerAddress.text = storeDetailBase.responseObject.address;
-                            
+                            _label_priceTimeStamp.text = [NSString stringWithFormat:@"* Prices updated on: %@",storeDetailBase.responseObject.lastUpdated];
                             
                             for (int i = 0; i < storeDetailBase.responseObject.productList.count; i++) {
                                 
@@ -87,28 +87,24 @@
                                     case 0:
                                         _label_regularTitle.text = product.product.productName;
                                         _label_regularValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        _label_regularTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
                                         
                                         break;
                                         
                                     case 1:
                                         _label_mediumTitle.text = product.product.productName;
                                         _label_mediumValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        _label_mediumTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
 
                                         break;
                                         
                                     case 2:
                                         _label_premiumTitle.text = product.product.productName;
                                         _label_premiumValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        _label_premiumTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
 
                                         break;
                                         
                                     case 3:
                                         _label_dieselTitle.text = product.product.productName;
                                         _label_dieselValue.text = [NSString stringWithFormat:@"$ %@",product.cost];
-                                        _label_dieselTimestamp.text = product.lastUpdated;//[NSString stringWithFormat:@"Last updated by: %@",product.lastUpdated];
 
                                         break;
                                         
@@ -180,7 +176,7 @@
     }
     else
     {
-        NSString *string = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%@,%@",storeDetailBase.responseObject.lat, storeDetailBase.responseObject.lon];
+        NSString *string = [NSString stringWithFormat:@"http://maps.apple.com/?ll=%@,%@&q=%@",storeDetailBase.responseObject.lat, storeDetailBase.responseObject.lon,[storeDetailBase.responseObject.name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:string]];
     }
 }
@@ -243,7 +239,7 @@
     marker.position = CLLocationCoordinate2DMake([storeDetailBase.responseObject.lat doubleValue], [storeDetailBase.responseObject.lon doubleValue]);
     
     PinAnnotationView *pin = [[PinAnnotationView alloc]initWithFrame:CGRectMake(0, 0, 62, 70)];
-    pin.imageView.image = [self getImageForBrand:storeDetailBase.responseObject.brand];
+    pin.imageView.image = [self getImageForBrand:storeDetailBase.responseObject.brand premiumflag:storeDetailBase.responseObject.isPremium];
     
     if (storeDetailBase.responseObject.productList.count)
     {

@@ -86,7 +86,7 @@
             
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                               timeoutInterval:10.0];
+                                                               timeoutInterval:30.0];
             
             [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -94,7 +94,7 @@
             
             NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
-                [self removeHudAfterDelay:0.1];
+                [self removeProgressHudAfterDelay:0.1];
                 
                 if (!error) {
                     NSError *localError = nil;

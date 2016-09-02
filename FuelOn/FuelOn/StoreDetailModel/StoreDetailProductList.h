@@ -12,7 +12,7 @@
 @interface StoreDetailProductList : NSObject <NSCoding, NSCopying>
 
 @property (nonatomic, strong) StoreDetailProduct *product;
-@property (nonatomic, strong) NSString *lastUpdated;
+//@property (nonatomic, strong) NSString *lastUpdated;
 @property (nonatomic, strong) NSString *cost;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;

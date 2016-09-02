@@ -19,7 +19,8 @@ NSString *const kStoreDetailResponseObjectOfferList = @"offerList";
 NSString *const kStoreDetailResponseObjectName = @"name";
 NSString *const kStoreDetailResponseObjectPhoneNumber = @"phoneNumber";
 NSString *const kStoreDetailResponseObjectBrand = @"brand";
-
+NSString *const kStoreDetailResponseObjectPremium = @"isPremium";
+NSString *const kStoreDetailResponseObjectLastUpdated = @"lastUpdated";
 
 
 @interface StoreDetailResponseObject ()
@@ -53,40 +54,42 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.address = [self objectOrNilForKey:kStoreDetailResponseObjectAddress fromDictionary:dict];
-    NSObject *receivedStoreDetailProductList = [dict objectForKey:kStoreDetailResponseObjectProductList];
-    NSMutableArray *parsedStoreDetailProductList = [NSMutableArray array];
-    if ([receivedStoreDetailProductList isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in (NSArray *)receivedStoreDetailProductList) {
-            if ([item isKindOfClass:[NSDictionary class]]) {
-                [parsedStoreDetailProductList addObject:[StoreDetailProductList modelObjectWithDictionary:item]];
+        self.address = [self objectOrNilForKey:kStoreDetailResponseObjectAddress fromDictionary:dict];
+        self.isPremium = [self objectOrNilForKey:kStoreDetailResponseObjectPremium fromDictionary:dict];
+        self.lastUpdated = [self objectOrNilForKey:kStoreDetailResponseObjectLastUpdated fromDictionary:dict];
+        NSObject *receivedStoreDetailProductList = [dict objectForKey:kStoreDetailResponseObjectProductList];
+        NSMutableArray *parsedStoreDetailProductList = [NSMutableArray array];
+        if ([receivedStoreDetailProductList isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *item in (NSArray *)receivedStoreDetailProductList) {
+                if ([item isKindOfClass:[NSDictionary class]]) {
+                    [parsedStoreDetailProductList addObject:[StoreDetailProductList modelObjectWithDictionary:item]];
+                }
             }
-       }
-    } else if ([receivedStoreDetailProductList isKindOfClass:[NSDictionary class]]) {
-       [parsedStoreDetailProductList addObject:[StoreDetailProductList modelObjectWithDictionary:(NSDictionary *)receivedStoreDetailProductList]];
-    }
-
-    self.productList = [NSArray arrayWithArray:parsedStoreDetailProductList];
-            self.responseObjectIdentifier = [self objectOrNilForKey:kStoreDetailResponseObjectId fromDictionary:dict];
-            self.lon = [self objectOrNilForKey:kStoreDetailResponseObjectLon fromDictionary:dict];
-            self.lat = [self objectOrNilForKey:kStoreDetailResponseObjectLat fromDictionary:dict];
-    NSObject *receivedStoreDetailOfferList = [dict objectForKey:kStoreDetailResponseObjectOfferList];
-    NSMutableArray *parsedStoreDetailOfferList = [NSMutableArray array];
-    if ([receivedStoreDetailOfferList isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in (NSArray *)receivedStoreDetailOfferList) {
-            if ([item isKindOfClass:[NSDictionary class]]) {
-                [parsedStoreDetailOfferList addObject:[StoreDetailOfferList modelObjectWithDictionary:item]];
+        } else if ([receivedStoreDetailProductList isKindOfClass:[NSDictionary class]]) {
+            [parsedStoreDetailProductList addObject:[StoreDetailProductList modelObjectWithDictionary:(NSDictionary *)receivedStoreDetailProductList]];
+        }
+        
+        self.productList = [NSArray arrayWithArray:parsedStoreDetailProductList];
+        self.responseObjectIdentifier = [self objectOrNilForKey:kStoreDetailResponseObjectId fromDictionary:dict];
+        self.lon = [self objectOrNilForKey:kStoreDetailResponseObjectLon fromDictionary:dict];
+        self.lat = [self objectOrNilForKey:kStoreDetailResponseObjectLat fromDictionary:dict];
+        NSObject *receivedStoreDetailOfferList = [dict objectForKey:kStoreDetailResponseObjectOfferList];
+        NSMutableArray *parsedStoreDetailOfferList = [NSMutableArray array];
+        if ([receivedStoreDetailOfferList isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *item in (NSArray *)receivedStoreDetailOfferList) {
+                if ([item isKindOfClass:[NSDictionary class]]) {
+                    [parsedStoreDetailOfferList addObject:[StoreDetailOfferList modelObjectWithDictionary:item]];
+                }
             }
-       }
-    } else if ([receivedStoreDetailOfferList isKindOfClass:[NSDictionary class]]) {
-       [parsedStoreDetailOfferList addObject:[StoreDetailOfferList modelObjectWithDictionary:(NSDictionary *)receivedStoreDetailOfferList]];
-    }
-
-    self.offerList = [NSArray arrayWithArray:parsedStoreDetailOfferList];
-            self.name = [self objectOrNilForKey:kStoreDetailResponseObjectName fromDictionary:dict];
-            self.phoneNumber = [self objectOrNilForKey:kStoreDetailResponseObjectPhoneNumber fromDictionary:dict];
+        } else if ([receivedStoreDetailOfferList isKindOfClass:[NSDictionary class]]) {
+            [parsedStoreDetailOfferList addObject:[StoreDetailOfferList modelObjectWithDictionary:(NSDictionary *)receivedStoreDetailOfferList]];
+        }
+        
+        self.offerList = [NSArray arrayWithArray:parsedStoreDetailOfferList];
+        self.name = [self objectOrNilForKey:kStoreDetailResponseObjectName fromDictionary:dict];
+        self.phoneNumber = [self objectOrNilForKey:kStoreDetailResponseObjectPhoneNumber fromDictionary:dict];
         self.brand = [self objectOrNilForKey:kStoreDetailResponseObjectBrand fromDictionary:dict];
-
+        
     }
     
     return self;
@@ -97,6 +100,8 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
 {
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:self.address forKey:kStoreDetailResponseObjectAddress];
+    [mutableDict setValue:self.isPremium forKey:kStoreDetailResponseObjectPremium];
+    [mutableDict setValue:self.lastUpdated forKey:kStoreDetailResponseObjectLastUpdated];
     NSMutableArray *tempArrayForProductList = [NSMutableArray array];
     for (NSObject *subArrayObject in self.productList) {
         if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
@@ -125,11 +130,11 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
     [mutableDict setValue:self.name forKey:kStoreDetailResponseObjectName];
     [mutableDict setValue:self.phoneNumber forKey:kStoreDetailResponseObjectPhoneNumber];
     [mutableDict setValue:self.brand forKey:kStoreDetailResponseObjectBrand];
-
+    
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
 
-- (NSString *)description 
+- (NSString *)description
 {
     return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
 }
@@ -147,8 +152,10 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-
+    
     self.address = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectAddress];
+    self.isPremium = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectPremium];
+    self.lastUpdated = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectLastUpdated];
     self.productList = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectProductList];
     self.responseObjectIdentifier = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectId];
     self.lon = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectLon];
@@ -157,13 +164,14 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
     self.name = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectName];
     self.phoneNumber = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectPhoneNumber];
     self.brand = [aDecoder decodeObjectForKey:kStoreDetailResponseObjectBrand];
-
+    
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-
+    [aCoder encodeObject:_isPremium forKey:kStoreDetailResponseObjectPremium];
+    [aCoder encodeObject:_lastUpdated forKey:kStoreDetailResponseObjectLastUpdated];
     [aCoder encodeObject:_address forKey:kStoreDetailResponseObjectAddress];
     [aCoder encodeObject:_productList forKey:kStoreDetailResponseObjectProductList];
     [aCoder encodeObject:_responseObjectIdentifier forKey:kStoreDetailResponseObjectId];
@@ -173,7 +181,7 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
     [aCoder encodeObject:_name forKey:kStoreDetailResponseObjectName];
     [aCoder encodeObject:_phoneNumber forKey:kStoreDetailResponseObjectPhoneNumber];
     [aCoder encodeObject:_brand forKey:kStoreDetailResponseObjectBrand];
-
+    
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -181,7 +189,8 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
     StoreDetailResponseObject *copy = [[StoreDetailResponseObject alloc] init];
     
     if (copy) {
-
+        copy.isPremium = [self.isPremium copyWithZone:zone];
+        copy.lastUpdated = [self.lastUpdated copyWithZone:zone];
         copy.address = [self.address copyWithZone:zone];
         copy.productList = [self.productList copyWithZone:zone];
         copy.responseObjectIdentifier = [self.responseObjectIdentifier copyWithZone:zone];
@@ -191,7 +200,7 @@ NSString *const kStoreDetailResponseObjectBrand = @"brand";
         copy.name = [self.name copyWithZone:zone];
         copy.phoneNumber = [self.phoneNumber copyWithZone:zone];
         copy.brand = [self.brand copyWithZone:zone];
-
+        
     }
     
     return copy;
