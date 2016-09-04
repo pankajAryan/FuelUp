@@ -11,7 +11,7 @@
 
 @interface StoreDetailProduct : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic, assign) id status;
+@property (nonatomic, strong) id status;
 @property (nonatomic, strong) NSString *productName;
 @property (nonatomic, strong) NSString *productId;
 

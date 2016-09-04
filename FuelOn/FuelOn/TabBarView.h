@@ -15,7 +15,7 @@
 
 @property (copy) void (^tabBarItemSelectionCallback)(NSInteger selectedItemIndex);
 
-- (void)setTabItemsLayoutWithProducts:(NSArray*)products;
+- (void)setTabItemsLayoutWithProducts:(NSArray*)products defaultSelectedIndex:(NSInteger)index;
 
 //- (void)setTabbarItemSelected:(NSInteger)itemIndex;
 

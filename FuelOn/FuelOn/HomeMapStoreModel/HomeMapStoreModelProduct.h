@@ -11,8 +11,8 @@
 
 @interface HomeMapStoreModelProduct : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic, assign) id status;
-@property (nonatomic, assign) id productName;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *productName;
 @property (nonatomic, strong) NSString *productId;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;

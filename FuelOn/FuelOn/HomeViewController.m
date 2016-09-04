@@ -69,7 +69,10 @@
                     lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
                     lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
                     
-                    [self setupMapView];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self setupMapView];
+                    });
+                    
                     [self fetchProducts];
                 }
                 else
@@ -263,28 +266,27 @@
                     
                     if ([[responseDict objectForKey:@"errorCode"] integerValue] == 0) {
                         
-                        NSMutableArray *fetchedProducts = [[responseDict objectForKey:@"responseObject"] mutableCopy];
+//                        NSMutableArray *fetchedProducts = [[responseDict objectForKey:@"responseObject"] mutableCopy];
+                        products = [responseDict objectForKey:@"responseObject"];
                         
                         NSString *favProductId = [UIViewController retrieveDataFromUserDefault:@"favProductId"];
-                        
+                        NSInteger defaultSelectionIndex = 0;
                         if (favProductId && favProductId.length) {
                             
                             NSPredicate * predicate = [NSPredicate predicateWithFormat:@"productId CONTAINS[cd]%@", favProductId];
-                            NSArray *filteredArray = [fetchedProducts filteredArrayUsingPredicate:predicate];
-                            
-                            NSInteger index = [fetchedProducts indexOfObject:[filteredArray objectAtIndex:0]];
-                            
-                            [fetchedProducts removeObjectAtIndex:index];
-                            [fetchedProducts insertObject:[filteredArray objectAtIndex:0] atIndex:0];
+                            NSArray *filteredArray = [products filteredArrayUsingPredicate:predicate];
+                            defaultSelectionIndex = [products indexOfObject:[filteredArray objectAtIndex:0]];
+//                            [fetchedProducts removeObjectAtIndex:index];
+//                            [fetchedProducts insertObject:[filteredArray objectAtIndex:0] atIndex:0];
                         }
                         
-                        products = [fetchedProducts copy];
+//                        products = [fetchedProducts copy];
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            [self fetchFuelStationsForSelectedType:0 showLoading:NO];
-                            
-                            [self.tabBar setTabItemsLayoutWithProducts:products];
+                            [self fetchFuelStationsForSelectedType:defaultSelectionIndex showLoading:NO];
+
+                            [self.tabBar setTabItemsLayoutWithProducts:products defaultSelectedIndex:defaultSelectionIndex];
                             
                             self.tabBar.tabBarItemSelectionCallback = ^(NSInteger selectedItemIndex){
                                 
@@ -333,10 +335,10 @@
             
             *stopUpdating = YES;
             
-            if (location)
+            if (location) // -36.908655 // 174.9392557
             {
-                lat = [NSString stringWithFormat:@"%f",-36.908655];     // location.coordinate.latitude
-                lon = [NSString stringWithFormat:@"%f",174.9392557];    // location.coordinate.longitude
+                lat = [NSString stringWithFormat:@"%f",location.coordinate.latitude];
+                lon = [NSString stringWithFormat:@"%f",location.coordinate.longitude];
                 
                 NSDictionary *productDict = [products objectAtIndex:index];
                 NSString *productId = [productDict objectForKey:@"productId"];
@@ -356,8 +358,8 @@
                     components.path = @"/FuelONServer/rest/service/getStoresForProductNearBy";
                     
                     NSURLQueryItem *item1 = [NSURLQueryItem queryItemWithName:@"productId" value:productId];
-                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:lat]; //  -36.908655 //  174.9392557
-                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:lon]; //
+                    NSURLQueryItem *item2 = [NSURLQueryItem queryItemWithName:@"lat" value:lat];
+                    NSURLQueryItem *item3 = [NSURLQueryItem queryItemWithName:@"lon" value:lon];
                     
                     components.queryItems = @[item1,item2,item3];
                     
@@ -424,7 +426,7 @@
 {
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[lat floatValue]
                                                                 longitude:[lon floatValue]
-                                                                     zoom:14]; //  -36.908655 //  174.9392557
+                                                                     zoom:14];
     
     _mapView.camera = camera;
     
@@ -482,6 +484,7 @@
 
 - (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
     
+    [_searchBar resignFirstResponder];
     // Use for dismissing menu (If in open state)
     
     if (_menuButton.tag) {

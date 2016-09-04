@@ -903,7 +903,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFD-L7-55J">
-                            <rect key="frame" x="0.0" y="1" width="80" height="60"/>
+                            <rect key="frame" x="0.0" y="1" width="80" height="59"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer_icon1" highlightedImage="footer_icon1_on" translatesAutoresizingMaskIntoConstraints="NO" id="ltz-nu-0Pb">
                                     <rect key="frame" x="0.0" y="6" width="80" height="30"/>
@@ -912,19 +912,18 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="121" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Regular 91" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3c-zN-5mG">
-                                    <rect key="frame" x="0.0" y="37" width="80" height="20"/>
+                                    <rect key="frame" x="0.0" y="37" width="80" height="19"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFG-oz-JiC">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="59"/>
                                     <connections>
                                         <action selector="tabBarItemDidSelect:" destination="fOP-XP-Ub1" eventType="touchUpInside" id="AOJ-8U-eFl"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.99215686270000003" green="0.63137254899999995" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.92991797571301238" green="0.92991797571301238" blue="0.92991797571301238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="D3c-zN-5mG" secondAttribute="trailing" id="4P3-Cd-lJA"/>
                                 <constraint firstItem="WFG-oz-JiC" firstAttribute="top" secondItem="iFD-L7-55J" secondAttribute="top" id="4TM-yA-8v8"/>
@@ -941,7 +940,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UC8-hE-uJv">
-                            <rect key="frame" x="80" y="1" width="80" height="60"/>
+                            <rect key="frame" x="80" y="1" width="80" height="59"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer_icon2" translatesAutoresizingMaskIntoConstraints="NO" id="ml9-9H-wqh">
                                     <rect key="frame" x="0.0" y="6" width="80" height="30"/>
@@ -950,17 +949,18 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="121" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Regular 95" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udo-sz-i9b">
-                                    <rect key="frame" x="0.0" y="37" width="80" height="20"/>
+                                    <rect key="frame" x="0.0" y="37" width="80" height="19"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfq-Sw-imd">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="59"/>
                                     <connections>
                                         <action selector="tabBarItemDidSelect:" destination="fOP-XP-Ub1" eventType="touchUpInside" id="76B-ms-uBU"/>
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="0.92991797571301238" green="0.92991797571301238" blue="0.92991797571301238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="Mfq-Sw-imd" firstAttribute="height" secondItem="UC8-hE-uJv" secondAttribute="height" id="6Qg-9l-M7s"/>
                                 <constraint firstItem="Mfq-Sw-imd" firstAttribute="width" secondItem="UC8-hE-uJv" secondAttribute="width" id="72y-U7-PVX"/>
@@ -976,7 +976,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-Dz-nsA">
-                            <rect key="frame" x="160" y="1" width="80" height="60"/>
+                            <rect key="frame" x="160" y="1" width="80" height="59"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer_icon3" translatesAutoresizingMaskIntoConstraints="NO" id="dTO-zL-tX0">
                                     <rect key="frame" x="0.0" y="6" width="80" height="30"/>
@@ -985,17 +985,18 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="121" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Regular 98" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEq-MU-Swa">
-                                    <rect key="frame" x="0.0" y="37" width="80" height="20"/>
+                                    <rect key="frame" x="0.0" y="37" width="80" height="19"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOY-xt-3fD">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="59"/>
                                     <connections>
                                         <action selector="tabBarItemDidSelect:" destination="fOP-XP-Ub1" eventType="touchUpInside" id="k4w-7b-NFT"/>
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="0.92991797571301238" green="0.92991797571301238" blue="0.92991797571301238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="KEq-MU-Swa" firstAttribute="top" secondItem="dTO-zL-tX0" secondAttribute="bottom" constant="1" id="1VH-wQ-b6u"/>
                                 <constraint firstItem="dTO-zL-tX0" firstAttribute="leading" secondItem="aJg-Dz-nsA" secondAttribute="leading" id="E3M-BG-LNv"/>
@@ -1011,7 +1012,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeX-0s-p0a">
-                            <rect key="frame" x="240" y="1" width="80" height="60"/>
+                            <rect key="frame" x="240" y="1" width="80" height="59"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer_icon4" translatesAutoresizingMaskIntoConstraints="NO" id="q5O-BL-s6q">
                                     <rect key="frame" x="0.0" y="6" width="80" height="30"/>
@@ -1020,17 +1021,18 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" tag="121" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diesel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcR-ZQ-XXL">
-                                    <rect key="frame" x="0.0" y="37" width="80" height="20"/>
+                                    <rect key="frame" x="0.0" y="37" width="80" height="19"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAu-ZW-wm8">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="59"/>
                                     <connections>
                                         <action selector="tabBarItemDidSelect:" destination="fOP-XP-Ub1" eventType="touchUpInside" id="lDA-S9-NCB"/>
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" red="0.92991797571301238" green="0.92991797571301238" blue="0.92991797571301238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="gAu-ZW-wm8" firstAttribute="top" secondItem="aeX-0s-p0a" secondAttribute="top" id="6f4-cF-A5H"/>
                                 <constraint firstItem="KcR-ZQ-XXL" firstAttribute="leading" secondItem="aeX-0s-p0a" secondAttribute="leading" id="C2f-Nz-yfP"/>
@@ -1048,7 +1050,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.92175291519494951" green="0.92175291519494951" blue="0.92175291519494951" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="iFD-L7-55J" firstAttribute="height" secondItem="fOP-XP-Ub1" secondAttribute="height" id="3c8-TU-BZ9"/>
+                        <constraint firstItem="iFD-L7-55J" firstAttribute="height" secondItem="fOP-XP-Ub1" secondAttribute="height" constant="-1" id="3c8-TU-BZ9"/>
                         <constraint firstItem="aeX-0s-p0a" firstAttribute="leading" secondItem="aJg-Dz-nsA" secondAttribute="trailing" id="A2V-HD-rds"/>
                         <constraint firstItem="aJg-Dz-nsA" firstAttribute="leading" secondItem="UC8-hE-uJv" secondAttribute="trailing" id="BtV-qL-MYh"/>
                         <constraint firstItem="aeX-0s-p0a" firstAttribute="width" secondItem="iFD-L7-55J" secondAttribute="width" id="Bxh-Bp-dZ3"/>

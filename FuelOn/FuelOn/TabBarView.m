@@ -42,39 +42,61 @@
 }
 */
 
-- (void)setTabItemsLayoutWithProducts:(NSArray*)products {
+- (void)setTabItemsLayoutWithProducts:(NSArray*)products defaultSelectedIndex:(NSInteger)index {
     
     _productTabItems = [products copy];
-    _selectedTabIndex = 1;
+    _selectedTabIndex = index;
         
     for (int i = 0; i < _productTabItems.count; i++) {
         
         NSDictionary *fuel = [_productTabItems objectAtIndex:i];
         
+        BOOL selected = (index == i) ? YES:NO;
+        
         switch (i)
         {
             case 0:
                 _item1Label.text = [fuel objectForKey:@"productName"];
-                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:YES]];
+                _item1.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:selected]];
+                
+                if (selected) {
+                    _containerViewItem1.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                    _item1Label.textColor = [UIColor whiteColor];
+                }
                 
                 break;
                 
             case 1:
                 _item2Label.text = [fuel objectForKey:@"productName"];
-                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+                _item2.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:selected]];
 
+                if (selected) {
+                    _containerViewItem2.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                    _item2Label.textColor = [UIColor whiteColor];
+                }
+                
                 break;
                 
             case 2:
                 _item3Label.text = [fuel objectForKey:@"productName"];
-                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+                _item3.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:selected]];
 
+                if (selected) {
+                    _containerViewItem3.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                    _item3Label.textColor = [UIColor whiteColor];
+                }
+                
                 break;
                 
             case 3:
                 _item4Label.text = [fuel objectForKey:@"productName"];
-                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:NO]];
+                _item4.image = [UIImage imageNamed:[self getImageForTabItem:_item1Label.text isSelected:selected]];
 
+                if (selected) {
+                    _containerViewItem4.backgroundColor = [UIColor colorWithRed:253/255.0 green:161/255.0 blue:2/255.0 alpha:1.0];
+                    _item4Label.textColor = [UIColor whiteColor];
+                }
+                
                 break;
                 
             default:

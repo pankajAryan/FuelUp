@@ -72,7 +72,7 @@
 //        leftMenuCell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 //    }
     
-    UIImageView *menuIcon = (UIImageView*)[leftMenuCell viewWithTag:120];
+//    UIImageView *menuIcon = (UIImageView*)[leftMenuCell viewWithTag:120];
     UILabel *menuTitle = (UILabel*)[leftMenuCell viewWithTag:121];
 
     switch (indexPath.row)
