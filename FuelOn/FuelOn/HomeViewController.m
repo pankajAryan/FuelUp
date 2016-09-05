@@ -101,6 +101,8 @@
     _mapView.settings.zoomGestures = YES;
     _mapView.settings.compassButton = YES;
     _mapView.settings.myLocationButton = NO;
+    
+    _mapView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning

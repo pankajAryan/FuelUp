@@ -665,7 +665,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-5e-KvP" customClass="GMSMapView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-5e-KvP" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="62" width="320" height="448"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -851,7 +851,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.92991797570000001" green="0.92991797570000001" blue="0.92991797570000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="u40-3A-g5M" firstAttribute="top" secondItem="VgS-5e-KvP" secondAttribute="bottom" constant="58" id="1xR-W5-WJY"/>
                             <constraint firstItem="VgS-5e-KvP" firstAttribute="leading" secondItem="gKv-7E-5B9" secondAttribute="trailing" constant="14.5" id="FXp-fk-hyt"/>
